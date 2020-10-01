@@ -54,6 +54,6 @@ _______________________________________________________________________________
 ### Overview
 *This project will be done for Springboard's Data Science Career Track as capstone three. This project pitch has been derived from the idea of a "Fact Checker" chatbot that uses NLP. I found that a automated fact-checker would be more useful to cipher through difficult to read documentation in a short amount of time. The scope of product ingredients was inspired by my fiancé's makeup business where her customers are often confused about product ingredients. If the product's ingredients and legal documentation was translated into a user-friendly chat interface, it would save her and the customers a lot of time.*
 
-GitHub repo: https://github.com/KalenWillits/CapstoneTwo.git
+GitHub repo: https://github.com/KalenWillits/CapstoneThree.git
 
 Author: Kalen Willits

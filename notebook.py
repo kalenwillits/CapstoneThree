@@ -1,7 +1,9 @@
 # notebook.py
 # %% markdown
 # # Document Reading Chat Bot - Notebook
-# - Transform any document into a chat bot and ask it questions.
+# Transform any document into a chat bot and ask it questions.
+#
+# *For the purpose of this study, we will use the "Rules of Chess" article on Wikipedia*
 
 # %% markdown
 # ## Table of Contents
