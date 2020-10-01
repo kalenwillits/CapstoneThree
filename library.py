@@ -1,5 +1,4 @@
 # library.py
-
 import wikipedia as wiki
 from nltk import word_tokenize, sent_tokenize
 from nltk.stem import 	WordNetLemmatizer
@@ -36,7 +35,6 @@ class StopWords:
         - Currently only reporting number of words.
         """
         print('Number of words: ', len(self.words))
-
 
 def load_wiki_article(article_name='Rules of chess', cd_data=''):
     """
@@ -85,7 +83,7 @@ def remove_stopwords(doc):
     stop = StopWords(cd_data=cd_data)
     doc_stop = []
     for word in lemmatize(doc):
-        if word not in stop.words:
+        if word.lower() not in stop.words:
             doc_stop.append(word)
     return doc_stop
 
@@ -107,6 +105,7 @@ class ProcessedArticle:
         """
         self.doc = doc
         self.tokenize = tokenize(self.doc)
+        self.sent_tokenize = sent_tokenize(self.doc)
         self.lemmatize = lemmatize(self.doc)
         self.remove_stopwords = remove_stopwords(self.doc)
         self.one_hot = one_hot(self.doc)
@@ -133,3 +132,19 @@ def batch_data(data, num_batches=10):
     '\nBatches: ', num_batches,
     '\nOriginal: ', size)
     return batches
+
+def count_token_frequency(article, data):
+    """
+    Counts the frequency of words that appear in each senctence.
+    - designed for (chess, token_counts_df)
+    - Returns as a Pandas DataFrame.
+    """
+    token_sent_freq = {}
+    for token in data.index:
+        counter = 0
+        for sent in article.sent_tokenize:
+            if token.lower() in sent.lower():
+                counter += 1
+        token_sent_freq[token] = [counter]
+    df = pd.DataFrame(token_sent_freq)
+    return df
