@@ -1,7 +1,7 @@
 # sandbox/SentenceFrequency.py
 
-chess.sent_tokenize
-token_counts_df
+article = chess
+data = token_counts_df
 
 
 """
@@ -14,6 +14,6 @@ for token in data.index:
     for sent in chess.sent_tokenize:
         if token.lower() in sent.lower():
             counter += 1
-    token_sent_freq[token] = counter
-df = token_sent_freq
-return df
+    token_sent_freq[token] = [counter]
+df = pd.DataFrame(token_sent_freq)
+df

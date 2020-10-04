@@ -54,60 +54,117 @@ def read_wiki_article(article_name='Rules of chess', cd_data=''):
         article = file.read()
     return article
 
-def tokenize(doc):
+def full_tokenize(doc):
     """
-    Makes use of NLTK's words tokenizer on a document string and changed all
+    Makes use of NLTK's word and sentence tokenizer on a document string and changed all
     words to lower case.
-    - Returns a list of lower case tokenized strings.
+    - Returns a list of lists lower case tokenized strings.
     """
-    doc_word = word_tokenize(doc.lower())
-    return doc_word
+    sentences = sent_tokenize(doc)
+    stop = StopWords(cd_data=cd_data)
+
+    sentence_tokens = []
+    for sentence in sentences:
+        word_tokens = word_tokenize(sentence)
+        word_lemons = []
+        for word in word_tokens:
+            if word not in stop.words:
+                word_lower = word.lower()
+                word_lemmatized = lemmatizer.lemmatize(word_lower)
+                word_lemons.append(word_lemmatized)
+        sentence_tokens.append(word_lemons)
+    return sentence_tokens
+
+    # def word_tokenize_plus(doc):
+    #     word_tokens = word_tokenize(doc)
+    #     word_processed = []
+    #     for word in word_tokens:
+    #         word_lower = word.lower()
+    #         word_lemon = lemmanize(word_lower)
+    #         word.
+    #         word_processed.append()
+    #     re
+
+
 
 def lemmatize(doc):
     """
     Uses the previous "tokenize" function and NLTK's lemmatizer to lemmatize
     the document and return it as a list.
     """
-    doc_word = word_tokenize(doc)
+    doc_lower = doc.lower()
+    doc_word = word_tokenize(doc_lower)
     doc_lemma = []
     for word in doc_word:
         doc_lemma.append(lemmatizer.lemmatize(word))
     return doc_lemma
 
-def remove_stopwords(doc):
+def tolest(doc):
     """
     Uses the previous "lemmatize" function and removes all stop words loaded in
     from the "StopWords" class. returns a list of strings with the stop words
     removed.
     """
+    doc_lower = doc.lower()
     stop = StopWords(cd_data=cd_data)
     doc_stop = []
-    for word in lemmatize(doc):
-        if word.lower() not in stop.words:
+    for word in lemmatize(doc_lower):
+        if word not in stop.words:
             doc_stop.append(word)
     return doc_stop
 
+def word_tokenize_plus(doc):
+    """
+    Tokenizes by word, removes stop words, and lemmatizes.
+    """
+    stop = StopWords(cd_data=cd_data)
+    word_lower = doc.lower()
+    word_tokens = word_tokenize(word_lower)
+
+    word_stop = []
+    for word in word_tokens:
+        if word not in stop.words:
+            word_stop.append(word)
+
+    word_lemons = []
+    for word in word_stop:
+        lemon = lemmatizer.lemmatize(word)
+        word_lemons.append(lemon)
+
+    return word_lemons
+
+def sent_tokenize_plus(doc):
+    doc_tolest = tolest(doc)
+    doc_join = ' '.join(doc_tolest)
+    doc_tokens = sent_tokenize(doc_join)
+    return doc_tokens
+
+
+
 def one_hot(doc):
     """
-    Uses the previous "remove_stopwords" function and one_hot encodes them
+    Uses the previous "tolest" function and one_hot encodes them
     using the Pandas.get_dummies method. Returns a Pandas dataframe.
     """
-    doc_stop = remove_stopwords(doc)
+    doc_stop = tolest(doc)
     df_1h = pd.get_dummies(doc_stop)
     return df_1h
 
-class ProcessedArticle:
+class ProcessArticle:
     def __init__(self, doc):
         """
-        Organizes the tokenize, lemmatize, remove_stopwords, and one_hot
+        Organizes the tokenize, lemmatize, tolest, and one_hot
         functions so that the document only needs to be passed when the class
         was instantiated.
         """
-        self.doc = doc
-        self.tokenize = tokenize(self.doc)
-        self.sent_tokenize = sent_tokenize(self.doc)
+        self.doc = doc.lower()
+        self.word_tokenize = word_tokenize(self.doc.lower())
+        self.word_tokenize_plus = word_tokenize_plus(self.doc)
+        self.sent_tokenize = sent_tokenize(self.doc.lower())
+        self.sent_tokenize_plus = sent_tokenize_plus(self.doc)
+        self.full_tokenize = full_tokenize(self.doc)
         self.lemmatize = lemmatize(self.doc)
-        self.remove_stopwords = remove_stopwords(self.doc)
+        self.tolest = tolest(self.doc)
         self.one_hot = one_hot(self.doc)
 
 
@@ -148,3 +205,15 @@ def count_token_frequency(article, data):
         token_sent_freq[token] = [counter]
     df = pd.DataFrame(token_sent_freq)
     return df
+
+
+def ngrams(doc, n):
+    """
+    Creates n word grams.
+    """
+    output = []
+    for i in range(len(doc)-n+1):
+        gram = ' '.join(doc[i:i+n])
+        if gram != '':
+            output.append(gram)
+    return output

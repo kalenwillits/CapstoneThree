@@ -1,27 +1,18 @@
+read_article = ProcessArticle(doc)
 
-cd_data='data/'; article_name='Rules of chess'; add_stop_words=[]
+#Gather user input
+user_doc = 'Checkers are not a good'
 
+#process user input
 
-stop = StopWords()
-for stop_word in add_stop_words:
-    stop.add_word(stop_word)
-
-with open(cd_data+article_name+'.txt', 'r+') as file:
-    doc = file.read()
+user_article = ProcessArticle(user_doc)
 
 
-doc_word = word_tokenize(doc)
-
-doc_lemma = []
-for word in doc_word:
-    doc_lemma.append(lemmatizer.lemmatize(word))
-
-doc_stop = []
-for word in doc_lemma:
-    if word not in stop.words:
-        doc_stop.append(word)
-
-doc_1h = pd.get_dummies(doc_stop)
+cmodel = Model(user_article, read_article, gate=16.4)
 
 
-doc_1h.sum().head(50)
+cmodel.grams
+cmodel.query_score
+
+cmodel.prediction
+cmodel.response

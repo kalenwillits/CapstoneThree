@@ -13,12 +13,15 @@
 
 # %% codecell
 # __Environment__
+
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 from wordcloud import WordCloud, ImageColorGenerator
 from PIL import Image
+from gensim.models import Word2Vec
 from library import *
+from model import *
 
 cd_data = 'data/'
 cd_figures = 'figures/'
@@ -32,10 +35,10 @@ cd_figures = 'figures/'
 # __Wrangle Data__
 # load_wiki_article(cd_data=cd_data)
 doc = read_wiki_article(cd_data=cd_data)
-chess = ProcessedArticle(doc)
+chess = ProcessArticle(doc)
 
 # __Transform__
-token_df = pd.DataFrame({'token':chess.remove_stopwords})
+token_df = pd.DataFrame({'token':chess.tolest})
 token_counts_df = pd.DataFrame(token_df['token'].value_counts())
 token_1h_df = chess.one_hot
 
@@ -88,3 +91,16 @@ plt.xticks(rotation=90)
 # words are repeated across the distribution within the same sentence.
 # Rule is the said the most, but not the most repeated. Which makes sense due to
 # the nature of the document.
+
+# %% codecell
+# __Prototyping__
+#Gather user input
+user_doc = 'Chess is a game with kings and queens'
+
+#process user input
+user_article = ProcessArticle(user_doc)
+
+# instansiate model
+model = Model(user_article, chess, gate=16.4)
+
+model.prediction
