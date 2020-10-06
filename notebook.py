@@ -98,7 +98,7 @@ plt.xticks(rotation=90)
 # user_doc = """the rules of chess (also known as the
 # laws of chess) are rules governing the play of the game of chess."""
 
-user_doc = 'Chess.'
+user_doc = 'Chess ---- .'
 # Process user input
 user_article = ProcessArticle(user_doc)
 

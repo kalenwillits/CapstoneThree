@@ -33,16 +33,16 @@ class StopWords:
         """
         print('Number of words: ', len(self.words))
 
-def load_wiki_article(article_name='Rules of chess', cd_data=''):
+def load_wiki_article(article_name='rules of chess', cd_data=''):
     """
-    Loads in the wiki article "Rules of chess" from Wikipedia and saves it
+    Loads in the wiki article "rules of chess" from Wikipedia and saves it
     to a .txt file.
     """
     article = wiki.page(article_name).content
     with open(cd_data+article_name+'.txt', 'w+') as file:
         file.write(article)
 
-def read_wiki_article(article_name='Rules of chess', cd_data=''):
+def read_wiki_article(article_name='rules of chess', cd_data=''):
     """
     Reads the wiki article off of the saved .txt file and
     returns it as a string.
