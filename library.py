@@ -11,9 +11,6 @@ from tqdm import tqdm
 cd_data = 'data/'
 cd_figures = 'figures/'
 
-lemmatizer = WordNetLemmatizer()
-
-
 class StopWords:
     def __init__(self, cd_data=''):
         """
@@ -74,17 +71,6 @@ def full_tokenize(doc):
                 word_lemons.append(word_lemmatized)
         sentence_tokens.append(word_lemons)
     return sentence_tokens
-
-    # def word_tokenize_plus(doc):
-    #     word_tokens = word_tokenize(doc)
-    #     word_processed = []
-    #     for word in word_tokens:
-    #         word_lower = word.lower()
-    #         word_lemon = lemmanize(word_lower)
-    #         word.
-    #         word_processed.append()
-    #     re
-
 
 
 def lemmatize(doc):
@@ -210,6 +196,7 @@ def count_token_frequency(article, data):
 def ngrams(doc, n):
     """
     Creates n word grams.
+    - Outputs as a list
     """
     output = []
     for i in range(len(doc)-n+1):
@@ -217,3 +204,60 @@ def ngrams(doc, n):
         if gram != '':
             output.append(gram)
     return output
+
+def generate_grams(user_article):
+    """
+    Takes an article from the ProcessArticle class and generates ngrams for
+    the full range of the user article.
+    """
+    grams = []
+    for i in range(len(user_article.tolest)):
+        ngram = ngrams(user_article.tolest, i)
+        grams.extend(ngram)
+    return grams
+
+def calculate_query(grams, read_article, weight_mod=2):
+    """
+    Counts the number of matches in the read article when compared to the user
+    article. The output is in a dictionary format with the gram as the keys and
+    number of relevant counts as the value.
+    """
+
+    query_score = {}
+    for gram in grams:
+        query_score[gram] = 0
+
+    for gram in grams:
+        for sentence in read_article.sent_tokenize_plus:
+            if gram in sentence:
+                query_score[gram] += 1
+
+    if weight_mod > 0:
+        for gram in grams:
+            mod_gram = len(gram.split(' '))**weight_mod
+            query_score[gram] *= mod_gram
+
+
+
+    return query_score
+
+
+def calculate_relevance(query_score):
+    """
+    Calculates the relevance score based on the values in the query score.
+    *** One known issue is if the user article is only one word, an error will
+    appear here.
+    """
+    relevance_score = np.mean(list(query_score.values()))
+    return relevance_score
+
+def predict_doc(relevance_score, gate):
+    """
+    This compares the relevance score to the user defined gate and returns a
+    true or false value depending on the relevancy when compared to the user
+    article.
+    """
+    if relevance_score < gate:
+        return False, relevance_score
+    elif relevance_score >= gate:
+        return True, relevance_score

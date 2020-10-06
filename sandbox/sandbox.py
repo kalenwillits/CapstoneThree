@@ -8,11 +8,6 @@ user_doc = 'Checkers are not a good'
 user_article = ProcessArticle(user_doc)
 
 
-cmodel = Model(user_article, read_article, gate=16.4)
+model = Model(user_article, read_article, gate=16.4)
 
-
-cmodel.grams
-cmodel.query_score
-
-cmodel.prediction
-cmodel.response
+model.response

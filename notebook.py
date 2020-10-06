@@ -21,7 +21,7 @@ from wordcloud import WordCloud, ImageColorGenerator
 from PIL import Image
 from gensim.models import Word2Vec
 from library import *
-from model import *
+from models import *
 
 cd_data = 'data/'
 cd_figures = 'figures/'
@@ -33,7 +33,7 @@ cd_figures = 'figures/'
 # ## Data Gathering And Transforming
 # %% codecell
 # __Wrangle Data__
-# load_wiki_article(cd_data=cd_data)
+# load_wiki_article(cd_data=cd_data) # Comment out after article has been loaded once.
 doc = read_wiki_article(cd_data=cd_data)
 chess = ProcessArticle(doc)
 
@@ -95,12 +95,16 @@ plt.xticks(rotation=90)
 # %% codecell
 # __Prototyping__
 #Gather user input
-user_doc = 'Chess is a game with kings and queens'
+# user_doc = """the rules of chess (also known as the
+# laws of chess) are rules governing the play of the game of chess."""
 
-#process user input
+user_doc = 'Chess.'
+# Process user input
 user_article = ProcessArticle(user_doc)
 
-# instansiate model
-model = Model(user_article, chess, gate=16.4)
+# Instantiate model
+model = Model(user_article, chess, gate=40, weight_mod=3)
 
+# Generate a prediction
 model.prediction
+model.query_score
