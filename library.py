@@ -7,31 +7,12 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from tqdm import tqdm
+from collections import Counter
+from gensim.models import Word2Vec
+
 
 cd_data = 'data/'
 cd_figures = 'figures/'
-
-class StopWords:
-    def __init__(self, cd_data=''):
-        """
-        Loads in stops words as a list from the "stop_words.txt file" as a list.
-        """
-        with open(cd_data+'stop_words.txt', 'r+') as file:
-            self.words = [word.strip('\n').lower() for word in file.readlines()]
-
-    def add_word(self, words):
-        """
-        Adds a word to the in-memory list.
-        This does not write to the stop_words.txt file
-         """
-        self.words.append(words)
-
-    def summary(self):
-        """
-        Prints summary information about stop the stop words list.
-        - Currently only reporting number of words.
-        """
-        print('Number of words: ', len(self.words))
 
 def load_wiki_article(article_name='rules of chess', cd_data=''):
     """
@@ -136,24 +117,6 @@ def one_hot(doc):
     df_1h = pd.get_dummies(doc_stop)
     return df_1h
 
-class ProcessArticle:
-    def __init__(self, doc):
-        """
-        Organizes the tokenize, lemmatize, tolest, and one_hot
-        functions so that the document only needs to be passed when the class
-        was instantiated.
-        """
-        self.doc = doc.lower()
-        self.word_tokenize = word_tokenize(self.doc.lower())
-        self.word_tokenize_plus = word_tokenize_plus(self.doc)
-        self.sent_tokenize = sent_tokenize(self.doc.lower())
-        self.sent_tokenize_plus = sent_tokenize_plus(self.doc)
-        self.full_tokenize = full_tokenize(self.doc)
-        self.lemmatize = lemmatize(self.doc)
-        self.tolest = tolest(self.doc)
-        self.one_hot = one_hot(self.doc)
-
-
 def batch_data(data, num_batches=10):
     """
     Splits an array into batches of a specified size.
@@ -237,8 +200,6 @@ def calculate_query(grams, read_article, weight_mod=2):
             mod_gram = len(gram.split(' '))**weight_mod
             query_score[gram] *= mod_gram
 
-
-
     return query_score
 
 
@@ -261,3 +222,117 @@ def predict_doc(relevance_score, gate):
         return False, relevance_score
     elif relevance_score >= gate:
         return True, relevance_score
+
+def generate_corpus(article):
+    """
+    Uses the collections.Counter class to generate a corpus document on a
+    ProcessArticle.tolest object.
+    """
+    article_keys = Counter(article).keys()
+    article_values = Counter(article).values()
+    article_zip = zip(article_keys, article_values)
+    article_dict = dict(article_zip)
+
+    return article_dict
+
+def train_vectors(train_data_name,
+                test_data,
+                corpus,
+                window=1,
+                epochs=1,
+                cd_data=''):
+    """
+    Train doc needs to be saved to a file.
+
+    train_data_name -> String of file name excluding the path.
+    test_data -> Fully tokenized read_article
+         from ProcessArticle.full_tokenize(doc).
+    corpus -> Corpus dictionary
+         from ProcessArticle.generate_corpus(train_article.tolest)
+    window -> Default window parameter from Word2Vec.
+    epochs -> Default epochs parameter from Word2vec.
+    cd_data -> data directory path as a string.
+
+    """
+
+    with open(cd_data+train_data_name, 'r+') as file:
+        train_data = file.read()
+
+    w2v = Word2Vec(test_data, window=window)
+    w2v.train(train_data, total_words=len(corpus), epochs=epochs)
+
+    return w2v.wv
+
+
+
+
+class ProcessArticle:
+    def __init__(self, doc):
+        """
+        Organizes the tokenize, lemmatize, tolest, and one_hot
+        functions so that the document only needs to be passed when the class
+        was instantiated.
+        """
+        self.doc = doc.lower()
+        self.word_tokenize = word_tokenize(self.doc.lower())
+        self.word_tokenize_plus = word_tokenize_plus(self.doc)
+        self.sent_tokenize = sent_tokenize(self.doc.lower())
+        self.sent_tokenize_plus = sent_tokenize_plus(self.doc)
+        self.full_tokenize = full_tokenize(self.doc)
+        self.lemmatize = lemmatize(self.doc)
+        self.tolest = tolest(self.doc)
+        self.one_hot = one_hot(self.doc)
+        self.corpus = generate_corpus(self.tolest)
+
+class StopWords:
+    def __init__(self, cd_data=''):
+        """
+        Loads in stops words as a list from the "stop_words.txt file" as a list.
+        """
+        with open(cd_data+'stop_words.txt', 'r+') as file:
+            self.words = [word.strip('\n').lower() for word in file.readlines()]
+
+    def add_word(self, words):
+        """
+        Adds a word to the in-memory list.
+        This does not write to the stop_words.txt file
+         """
+        self.words.append(words)
+
+    def summary(self):
+        """
+        Prints summary information about stop the stop words list.
+        - Currently only reporting number of words.
+        """
+        print('Number of words: ', len(self.words))
+
+class ChatBotModel:
+    def __init__(self,
+            user_article,
+            read_article,
+            train_data_name,
+            gate=40,
+            weight_mod=2,
+            window=1,
+            epochs=1,
+            cd_data=cd_data):
+        """
+        Model of the user article when compared to the read article.
+        gate -> The threshold of proper relevance. A low gate will cause more
+        false positives and a high gate will cause more false negatives.
+        """
+        self.gate = gate
+        self.user_article = user_article
+        self.read_article = read_article
+        self.grams = generate_grams(self.user_article)
+        self.query_score = calculate_query(self.grams,
+        self.read_article,
+        weight_mod=weight_mod)
+        self.relevance_score = calculate_relevance(self.query_score)
+        self.prediction = predict_doc(self.relevance_score, self.gate)
+        self.vectors = train_vectors(train_data_name,
+                                    self.read_article.full_tokenize,
+                                    self.read_article.corpus,
+                                    window=window,
+                                    epochs=epochs,
+                                    cd_data=cd_data)

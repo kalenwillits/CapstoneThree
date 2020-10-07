@@ -7,7 +7,7 @@
 
 # %% markdown
 # ## Table of Contents
-# - [Data Gathering And Transforming](#Data-Gathering-And-Transforming)
+# - [Data Gathering And Transforming](#Data-Gat hering-And-Transforming)
 # - [Exploratory Data Analysis](#Exploratory-Data-Analysis)
 #   - [Observation](Observation)
 
@@ -19,9 +19,8 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from wordcloud import WordCloud, ImageColorGenerator
 from PIL import Image
-from gensim.models import Word2Vec
 from library import *
-from models import *
+# from models import *
 
 cd_data = 'data/'
 cd_figures = 'figures/'
@@ -103,7 +102,13 @@ user_doc = 'Chess ---- .'
 user_article = ProcessArticle(user_doc)
 
 # Instantiate model
-model = Model(user_article, chess, gate=40, weight_mod=3)
+model = ChatBotModel(user_article,
+                    chess,
+                    'train_sample.txt',
+                    gate=40,
+                    weight_mod=3,
+                    window=1,
+                    epochs=1)
 
 # Generate a prediction
 model.prediction

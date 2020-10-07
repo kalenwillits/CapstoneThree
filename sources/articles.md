@@ -17,3 +17,7 @@
 [Google's trained Word2Vec model in Python](http://mccormickml.com/2016/04/12/googles-pretrained-word2vec-model-in-python/)
 
 [Rules of Chess](https://en.wikipedia.org/wiki/Rules_of_chess)
+
+[Wikipedia Article Titles](https://www.kaggle.com/residentmario/wikipedia-article-titles)
+
+[Webster's Unabridged Dictionary by Various](http://www.gutenberg.org/ebooks/29765)

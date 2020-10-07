@@ -44,7 +44,9 @@ TODO:
 <!-- - Remove stop-words and punctuation from data. -->
 <!-- - Gather and create several dataframes -->
 <!-- - Create flow chart and sudo-code project plan. -->
-- Create prototype of chatbot in terminal
-- Add larger weights to larger grams in the calculate_query function
-- ***Find a way for more relevant words to be worth more weight in the score. ( Maybe a gradient boosting technique
-- Log transcript.txt with metrics)
+<!-- - Create prototype of chatbot in terminal -->
+<!-- - Add larger weights to larger grams in the calculate_query function -->
+<!-- - ***Find a way for more relevant words to be worth more weight in the score. ( Maybe a gradient boosting technique ( canceled, the weights for larger ngrams should be sufficient) -->
+Use the word2vec vectors in the calculation to find synonyms.
+- Use the code in Gensim.py to do this.
+<!-- - Add create corpus function to process article in library. -->
