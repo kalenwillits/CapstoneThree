@@ -10,6 +10,8 @@
 # - [Data Gathering And Transforming](#Data-Gat hering-And-Transforming)
 # - [Exploratory Data Analysis](#Exploratory-Data-Analysis)
 #   - [Observation](Observation)
+# - [Feature Engineering](#Feature-Engineering)
+# - [Testing Data](#Testing-Data)
 
 # %% codecell
 # __Environment__
@@ -91,25 +93,46 @@ plt.xticks(rotation=90)
 # Rule is the said the most, but not the most repeated. Which makes sense due to
 # the nature of the document.
 
+# %% markdown
+# ### Feature Engineering
+#  Now that we have an idea of what the article looks like mathematically, we
+# can create a model based on the input. The model I have chosen is a
+# Frankenstein neural network using Word2Vec and ngrams to classify whether a
+# statement is true or false.
+
 # %% codecell
 # __Prototyping__
 #Gather user input
-# user_doc = """the rules of chess (also known as the
-# laws of chess) are rules governing the play of the game of chess."""
-
-user_doc = 'Chess ---- .'
+user_doc = 'The Queen can move in any direction'
 # Process user input
 user_article = ProcessArticle(user_doc)
-
+# train_article = ProcessArticle(read_doc)
 # Instantiate model
-model = ChatBotModel(user_article,
-                    chess,
-                    'train_sample.txt',
-                    gate=40,
-                    weight_mod=3,
-                    window=1,
-                    epochs=1)
+
+model = ChatBotModel(user_article=user_article,
+                    read_article=chess,
+                    train_article=chess,
+                    train_article_name='train_sample.txt',
+                    gate=30,
+                    weight_mod=1.5,
+                    window=50,
+                    epochs=15,
+                    vector_weight=10,
+                    vector_scope=5)
 
 # Generate a prediction
-model.prediction
-model.query_score
+user_article.tolest
+print(model.prediction, model.query_score)
+
+# %% markdown
+# ### Testing Data
+#  Training and validation data have been gathered using the scripts
+# "gather_articles.py" and "generate_validation_data.py." The data sets.
+# data/train_data.txt -> A large document containing ~1000 appended wiki
+# articles
+# data/train_sample.txt -> A modified wiki article for fast testing.
+# data/validation.csv -> A dataset containing sentences from the rules of chess
+# and another random wiki article for performance measurement and model tuning.
+
+# %% codecell
+validation_df = pd.read_csv(cd_data+'validation_data.csv')

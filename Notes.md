@@ -47,6 +47,9 @@ TODO:
 <!-- - Create prototype of chatbot in terminal -->
 <!-- - Add larger weights to larger grams in the calculate_query function -->
 <!-- - ***Find a way for more relevant words to be worth more weight in the score. ( Maybe a gradient boosting technique ( canceled, the weights for larger ngrams should be sufficient) -->
-Use the word2vec vectors in the calculation to find synonyms.
-- Use the code in Gensim.py to do this.
 <!-- - Add create corpus function to process article in library. -->
+<!-- Use the word2vec vectors in the calculation to find synonyms.
+- Use the code in Gensim.py to do this. -->
+Update prototype ( for presentation )
+Create a validation data set for metrics.
+- Use this data to create a confusion matrix for measuring model performance.

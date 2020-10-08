@@ -149,3 +149,16 @@ def count_token_frequency(article, data):
         token_sent_freq[token] = [counter]
     df = pd.DataFrame(token_sent_freq)
     return df
+
+
+
+
+
+
+
+
+np.mean(list(dict(model.vectors.similar_by_word('chess', topn=25)).values()))
+
+np.mean(model.vectors['queen'] - model.vectors['king')
+
+help(model.vectors.similar_by_word)

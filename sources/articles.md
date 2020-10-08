@@ -18,6 +18,6 @@
 
 [Rules of Chess](https://en.wikipedia.org/wiki/Rules_of_chess)
 
-[Wikipedia Article Titles](https://www.kaggle.com/residentmario/wikipedia-article-titles)
+[Top 1000 Wikipedia Articles](https://en.wikipedia.org/wiki/User:HostBot/Top_1000_report)
 
 [Webster's Unabridged Dictionary by Various](http://www.gutenberg.org/ebooks/29765)

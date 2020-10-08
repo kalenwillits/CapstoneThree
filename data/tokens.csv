@@ -350,7 +350,6 @@ basic
 type
 chess
 piece
-ha
 method
 movement
 piece
@@ -452,10 +451,8 @@ forward
 square
 square
 vacant
-ha
 moved
 pawn
-ha
 option
 moving
 square
@@ -878,7 +875,6 @@ automatically
 draw
 player
 check
-ha
 legal
 situation
 called
@@ -919,7 +915,6 @@ game
 drawn
 board
 position
-ha
 occurred
 time
 player
@@ -935,7 +930,6 @@ passant
 threefold
 repetition
 rule
-ha
 capture
 pawn
 fifty
@@ -955,7 +949,6 @@ request
 necessary
 board
 position
-ha
 occurred
 time
 fivefold
@@ -1119,7 +1112,6 @@ player
 promote
 pawn
 pawn
-ha
 moved
 player
 touch
@@ -1149,7 +1141,6 @@ legally
 moved
 long
 hand
-ha
 left
 piece
 new
@@ -1217,7 +1208,6 @@ substituted
 different
 pawn
 player
-ha
 stopped
 touching
 complete
@@ -1242,7 +1232,6 @@ j'adoube
 i
 adjust
 game
-ha
 started
 player
 touch
@@ -1310,7 +1299,6 @@ flag
 fall
 flag
 fall
-ha
 consequence
 unless
 stated
@@ -1334,7 +1322,6 @@ relevance
 player
 run
 time
-ha
 run
 time
 wa
@@ -1635,7 +1622,6 @@ notation
 time
 clock
 player
-ha
 le
 minute
 left
@@ -1707,11 +1693,9 @@ player
 correct
 illegal
 player
-ha
 pressed
 clock
 player
-ha
 pressed
 clock
 illegal
@@ -1769,16 +1753,13 @@ series
 legal
 e.g
 opponent
-ha
 bare
 king
 case
 game
 drawn
 completed
-ha
 player
-ha
 pressed
 clock
 illegal
@@ -1828,7 +1809,6 @@ position
 time
 discovered
 illegal
-ha
 piece
 displaced
 game
@@ -2250,7 +2230,6 @@ stalemate
 wa
 added
 outcome
-ha
 changed
 time
 history

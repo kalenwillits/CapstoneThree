@@ -10,11 +10,26 @@ from tqdm import tqdm
 from collections import Counter
 from gensim.models import Word2Vec
 
-
+# __Default Parameters__
 cd_data = 'data/'
 cd_figures = 'figures/'
+vector_scope = 10
+weight_mod = 3
+vector_weight = 1
+epochs = 1
+window = 1
+gate = 40
+weight_mod = 3
+grams = None
+read_article = None
+read_article_name = 'rules of chess'
+user_article = None
+train_article = None
+train_article_name = None
+vectors = None
 
-def load_wiki_article(article_name='rules of chess', cd_data=''):
+
+def load_wiki_article(article_name=read_article_name, cd_data=cd_data):
     """
     Loads in the wiki article "rules of chess" from Wikipedia and saves it
     to a .txt file.
@@ -23,7 +38,7 @@ def load_wiki_article(article_name='rules of chess', cd_data=''):
     with open(cd_data+article_name+'.txt', 'w+') as file:
         file.write(article)
 
-def read_wiki_article(article_name='rules of chess', cd_data=''):
+def read_wiki_article(article_name=read_article_name, cd_data=cd_data):
     """
     Reads the wiki article off of the saved .txt file and
     returns it as a string.
@@ -179,7 +194,12 @@ def generate_grams(user_article):
         grams.extend(ngram)
     return grams
 
-def calculate_query(grams, read_article, weight_mod=2):
+def calculate_query(grams=grams,
+                    read_article=read_article,
+                    vectors=vectors,
+                    vector_scope=vector_scope,
+                    weight_mod=weight_mod,
+                    vector_weight=vector_weight):
     """
     Counts the number of matches in the read article when compared to the user
     article. The output is in a dictionary format with the gram as the keys and
@@ -187,10 +207,27 @@ def calculate_query(grams, read_article, weight_mod=2):
     """
 
     query_score = {}
+    stop = StopWords()
+
     for gram in grams:
         query_score[gram] = 0
 
     for gram in grams:
+        #
+        # assert gram in stop.words, """{0} is not in the corpus! Consider
+        # #                                 increasing the amount of data or adding
+        # #                             {0} to stop_words.txt')""".format(gram)
+        if len(gram.split(' ')) == 1:
+            try:
+                vectors_dict = dict(vectors.similar_by_word(gram, topn=vector_scope))
+                vectors_list = list(vectors_dict)
+                for key in vectors_dict.keys():
+                    for sentence in read_article.sent_tokenize_plus:
+                        if key in sentence:
+                            query_score[gram] += vectors_dict[key]*vector_weight
+            except KeyError:
+                pass
+
         for sentence in read_article.sent_tokenize_plus:
             if gram in sentence:
                 query_score[gram] += 1
@@ -199,6 +236,7 @@ def calculate_query(grams, read_article, weight_mod=2):
         for gram in grams:
             mod_gram = len(gram.split(' '))**weight_mod
             query_score[gram] *= mod_gram
+
 
     return query_score
 
@@ -235,16 +273,16 @@ def generate_corpus(article):
 
     return article_dict
 
-def train_vectors(train_data_name,
+def train_vectors(train_article_name,
                 test_data,
                 corpus,
-                window=1,
-                epochs=1,
-                cd_data=''):
+                window=window,
+                epochs=epochs,
+                cd_data=cd_data):
     """
     Train doc needs to be saved to a file.
 
-    train_data_name -> String of file name excluding the path.
+    train_article_name -> String of file name excluding the path.
     test_data -> Fully tokenized read_article
          from ProcessArticle.full_tokenize(doc).
     corpus -> Corpus dictionary
@@ -255,7 +293,7 @@ def train_vectors(train_data_name,
 
     """
 
-    with open(cd_data+train_data_name, 'r+') as file:
+    with open(cd_data+train_article_name, 'r+') as file:
         train_data = file.read()
 
     w2v = Word2Vec(test_data, window=window)
@@ -285,7 +323,7 @@ class ProcessArticle:
         self.corpus = generate_corpus(self.tolest)
 
 class StopWords:
-    def __init__(self, cd_data=''):
+    def __init__(self, cd_data=cd_data):
         """
         Loads in stops words as a list from the "stop_words.txt file" as a list.
         """
@@ -308,14 +346,17 @@ class StopWords:
 
 class ChatBotModel:
     def __init__(self,
-            user_article,
-            read_article,
-            train_data_name,
-            gate=40,
-            weight_mod=2,
-            window=1,
-            epochs=1,
-            cd_data=cd_data):
+            user_article=user_article,
+            read_article=read_article,
+            train_article=train_article,
+            train_article_name=train_article_name,
+            cd_data=cd_data,
+            gate=gate,
+            weight_mod=weight_mod,
+            window=window,
+            epochs=epochs,
+            vector_scope=vector_scope,
+            vector_weight=vector_weight):
         """
         Model of the user article when compared to the read article.
         gate -> The threshold of proper relevance. A low gate will cause more
@@ -325,14 +366,26 @@ class ChatBotModel:
         self.user_article = user_article
         self.read_article = read_article
         self.grams = generate_grams(self.user_article)
-        self.query_score = calculate_query(self.grams,
-        self.read_article,
-        weight_mod=weight_mod)
+
+        self.vectors = train_vectors(train_article_name,
+                        self.read_article.full_tokenize,
+                        train_article.corpus,
+                        window=window,
+                        epochs=epochs,
+                        cd_data=cd_data)
+
+        self.query_score = calculate_query(grams=self.grams,
+                            read_article=self.read_article,
+                            vectors=self.vectors,
+                            vector_scope=vector_scope,
+                            weight_mod=weight_mod,
+                            vector_weight=vector_weight)
+
         self.relevance_score = calculate_relevance(self.query_score)
         self.prediction = predict_doc(self.relevance_score, self.gate)
-        self.vectors = train_vectors(train_data_name,
-                                    self.read_article.full_tokenize,
-                                    self.read_article.corpus,
-                                    window=window,
-                                    epochs=epochs,
-                                    cd_data=cd_data)
+        self.parameters = {'gate': gate,
+                            'weight_mod': weight_mod,
+                            'window': window,
+                            'epochs': epochs,
+                            'vector_scope': vector_scope,
+                            'vector_weight': vector_weight}
