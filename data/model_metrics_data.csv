@@ -1,0 +1,485 @@
+,user_doc,type,predict,score
+0,the rules of chess (also known as the laws of chess) are rules governing the play of the game of chess.,True,False,28.714557466550783
+1,"while the exact origins of chess are unclear, modern rules first took form during the middle ages.",True,False,14.931005015074557
+2,"the rules continued to be slightly modified until the early 19th century, when they reached essentially their current form.",True,False,14.982866591672453
+3,the rules also varied somewhat from place to place.,True,False,14.382819995305384
+4,"today, the standard rules are set by fide (fédération internationale des échecs), the international governing body for chess.",True,False,17.2101703012584
+5,slight modifications are made by some national organizations for their own purposes.,True,False,3.70729755479319
+6,"there are variations of the rules for fast chess, correspondence chess, online chess, and chess960.",True,False,19.431472181396973
+7,chess is a two-player board game using a chessboard and sixteen pieces of six types for each player.,True,False,19.400072716037087
+8,each type of piece moves in a distinct way.,True,False,18.369913436079838
+9,the object of the game is to checkmate (threaten with inescapable capture) the opponent's king.,True,False,18.486980233943232
+10,games do not necessarily end in checkmate; players often resign if they believe they will lose.,True,False,16.788618227334602
+11,a game can also end in a draw in several ways.,True,True,31.44931218196714
+12,"besides the basic moves of the pieces, rules also govern the equipment used, time control, conduct and ethics of players, accommodations for physically challenged players, and recording of moves using chess notation.",True,False,25.95692443702394
+13,procedures for resolving irregularities that can occur during a game are provided as well.,True,False,10.54966168887441
+14,"== initial setup ==
+
+chess is played on a chessboard, a square board divided into 64 squares (eight-by-eight) of alternating color, which is similar to that used in draughts (checkers) (fide 2008).",True,False,25.17334069293175
+15,"no matter what the actual colors of the board, the lighter-colored squares are called ""light"" or ""white"", and the darker-colored squares are called ""dark"" or ""black"".",True,False,20.941507123025183
+16,"sixteen ""white"" and sixteen ""black"" pieces are placed on the board at the beginning of the game.",True,False,18.987611152240085
+17,the board is placed so that a white square is in each player's near-right corner.,True,False,20.064188102445932
+18,horizontal rows are called ranks and vertical rows are called files.,True,False,15.083680426152497
+19,"each player controls sixteen pieces:
+
+at the beginning of the game, the pieces are arranged as shown in the diagram: for each side one king, one queen, two rooks, two bishops, two knights, and eight pawns.",True,False,25.3770087418649
+20,"the pieces are placed, one on a square, as follows:
+
+the rooks are placed on the outside corners, right and left edge.",True,False,18.725105379881885
+21,the knights are placed immediately inside of the rooks.,True,False,20.98032657990507
+22,the bishops are placed immediately inside of the knights.,True,False,20.925553700508907
+23,the queen is placed on the central square of the same color of that of the player: white queen on the white square and black queen on the black square.,True,False,25.058231434025476
+24,the king takes the vacant spot next to the queen.,True,False,26.319746584135444
+25,"the pawns are placed one square in front of all of the other pieces.popular mnemonics used to remember the setup are ""queen on her own color"" and ""white on right"".",True,False,18.74442579914058
+26,the latter refers to setting up the board so that the square closest to each player's right is white (schiller 2003:16–17).,True,False,19.483963392557747
+27,"== gameplay ==
+
+the player controlling the white pieces is named ""white""; the player controlling the black pieces is named ""black"".",True,False,22.95258566290961
+28,"white moves first, then players alternate moves.",True,True,37.85167867689432
+29,"making a move is required; it is not legal to skip a move, even when having to move is detrimental.",True,False,11.904144751463203
+30,"play continues until a king is checkmated, a player resigns, or a draw is declared, as explained below.",True,False,15.78967597319464
+31,"in addition, if the game is being played under a time control players who exceed their time limit lose the game.",True,False,22.096113366212435
+32,the official chess rules do not include a procedure for determining who plays white.,True,False,19.210776361959898
+33,"instead, this decision is left open to tournament-specific rules (e.g.",True,False,14.366407389966573
+34,"a swiss system tournament or round-robin tournament) or, in the case of non-competitive play, mutual agreement, in which case some kind of random choice is often employed.",True,False,18.45885595670284
+35,"a common method is for one player to conceal a piece (usually a pawn) of each color in either hand; the other player chooses a hand to open, and receives the color of the piece that is revealed.",True,False,24.270283715288087
+36,"=== movement ===
+
+
+==== basic moves ====
+
+each type of chess piece has its own method of movement.",True,False,20.77890991130143
+37,a piece moves to a vacant square except when capturing an opponent's piece.,True,False,27.07020966048197
+38,"except for any move of the knight and castling, pieces cannot jump over other pieces.",True,True,30.03507745468855
+39,a piece is captured (or taken) when an attacking enemy piece replaces it on its square (en passant is the only exception).,True,False,18.479976604167504
+40,the captured piece is thereby permanently removed from the game.,True,False,22.315386992499857
+41,the king can be put in check but cannot be captured (see below).,True,True,45.372819595770565
+42,"the king moves exactly one square horizontally, vertically, or diagonally.",True,False,18.836416267786298
+43,"a special move with the king known as castling is allowed only once per player, per game (see below).",True,False,22.43026907159624
+44,a rook moves any number of vacant squares horizontally or vertically.,True,False,23.630758785639078
+45,it also is moved when castling.,True,True,82.9538451731205
+46,a bishop moves any number of vacant squares diagonally.,True,True,30.658345387470067
+47,"the queen moves any number of vacant squares horizontally, vertically, or diagonally.",True,False,20.608514956826557
+48,"a knight moves to the nearest square not on the same rank, file, or diagonal.",True,False,13.871668181751044
+49,"(this can be thought of as moving two squares horizontally then one square vertically, or moving one square horizontally then two squares vertically—i.e.",True,False,27.58756620139452
+50,"in an ""l"" pattern.)",True,False,3.0
+51,the knight is not blocked by other pieces: it jumps to the new location.,True,False,16.42840573880461
+52,"pawns have the most complex rules of movement:a pawn moves straight forward one square, if that square is vacant.",True,False,20.490739163655004
+53,"if it has not yet moved, a pawn also has the option of moving two squares straight forward, provided both squares are vacant.",True,False,17.62320614704601
+54,pawns cannot move backwards.,True,True,39.41658481955528
+55,pawns are the only pieces that capture differently from how they move.,True,False,29.041569055384887
+56,a pawn can capture an enemy piece on either of the two squares diagonally in front of the pawn (but cannot move to those squares if they are vacant).,True,False,22.696492759961895
+57,the pawn is also involved in the two special moves en passant and promotion (schiller 2003:17–19).,True,False,17.580334188177826
+58,"==== castling ====
+
+castling consists of moving the king two squares towards a rook, then placing the rook on the other side of the king, adjacent to it.",True,False,21.579084477896497
+59,"it is not allowed to move both king and rook in the same time, because ""each move must be played with one hand only."".",True,False,25.384684465633455
+60,"castling is only permissible if all of the following conditions hold:
+the king and rook involved in castling must not have previously moved;
+there must be no pieces between the king and the rook;
+the king may not currently be in check, nor may the king pass through or end up in a square that is under attack by an enemy piece (though the rook is permitted to be under attack and to pass over an attacked square);
+the castling must be kingside or queenside as shown in the diagram.",True,True,54.31265317788696
+61,"==== en passant ====
+
+when a pawn advances two squares from its original square and ends the turn adjacent to a pawn of the opponent's on the same rank, it may be captured by that pawn of the opponent's, as if it had moved only one square forward.",True,True,31.259515049538795
+62,this capture is only legal on the opponent's next move immediately following the first pawn's advance.,True,False,20.58007087706574
+63,"the diagrams on the right demonstrate an instance of this: if the white pawn moves from a2 to a4, the black pawn on b4 can capture it en passant, moving from b4 to a3 while the white pawn on a4 is removed from the board.",True,True,30.68147808962405
+64,"==== pawn promotion ====
+
+if a player advances a pawn to its eighth rank, the pawn is then promoted (converted) to a queen, rook, bishop, or knight of the same color at the choice of the player (a queen is usually chosen).",True,False,29.48248168587132
+65,the choice is not limited to previously captured pieces.,True,False,13.967002595129381
+66,"hence it is theoretically possible for a player to have up to nine queens or up to ten rooks, bishops, or knights if all of their pawns are promoted.",True,False,24.200908342897264
+67,"if the desired piece is not available, the player must call the arbiter to provide the piece.",True,False,20.484013693808517
+68,"=== check ===
+
+a king is in check when it is under attack by at least one enemy piece.",True,False,25.057329326665847
+69,a piece unable to move because it would place its own king in check (it is pinned against its own king) may still deliver check to the opposing player.,True,False,19.388859759246277
+70,it is illegal to make a move that places or leaves one's king in check.,True,False,19.6397728326405
+71,"the possible ways to get out of check are:
+
+move the king to a square where it is not in check.",True,False,26.284487309027398
+72,capture the checking piece (possibly with the king).,True,False,19.722864844724622
+73,"block the check by placing a piece between the king and the opponent's threatening piece (just 2014), (polgar & truong 2005:32,103), (burgess 2009:550).if it is not possible to get out of check, the king is checkmated and the game is over (see the next section).",True,True,31.87261447106226
+74,"in informal games, it is customary to announce ""check"" when making a move that puts the opponent's king in check.",True,False,19.56802306099291
+75,"however, in formal competitions check is rarely announced (just 2014).",True,False,17.94945931459316
+76,"=== end of the game ===
+
+
+==== checkmate ====
+
+if a player's king is placed in check and there is no legal move that player can make to escape check, then the king is said to be checkmated, the game ends, and that player loses (schiller 2003:20–21).",True,True,32.61248934966373
+77,"unlike other pieces, capturing the opponent's king is not allowed.the diagram shows an example checkmate position.",True,False,19.324196947484047
+78,"the white king is threatened by the black queen; the square to which the king could move is also threatened; it cannot capture the queen, because it would then be in check by the rook.",True,False,23.06988674603738
+79,"==== resigning ====
+either player may resign at any time, conceding the game to their opponent.",True,False,20.454315740310907
+80,"a player may resign by saying it verbally or by indicating it on their score sheet in any of three ways: (1) by writing ""resigns"", (2) by circling the result of the game, or (3) by writing ""1–0"" if black resigns or ""0–1"" if white resigns (schiller 2003:21).",True,True,33.46530792912952
+81,"tipping over the king also indicates resignation, but it is not frequently used and should be distinguished from accidentally knocking the king over.",True,False,12.96935292382461
+82,"stopping both clocks is not an indication of resigning, since clocks can be stopped to call the arbiter.",True,False,14.0039668484091
+83,"an offer of a handshake is not necessarily a resignation either, since one player could think they are agreeing to a draw (just 2014).",True,False,16.354053662812063
+84,"==== dead position ====
+
+a dead position is defined as a position where neither player can win the game by any sequence of legal moves.",True,False,24.62748455940159
+85,any positions with the following pieces only are known as dead positions.,True,False,28.765635436495007
+86,"the uscf rules speak of insufficient material for these positions:king against king;
+king against king and bishop;
+king against king and knight;
+king and bishop against king and bishop, with both bishops on squares of the same color (see king and two bishops).",True,True,39.02359963560198
+87,"however, insufficient material is not the only condition for a dead position.",True,False,20.170106546974694
+88,there are positions where the pieces on the board would be sufficient to mate if arranged otherwise.,True,False,18.452384542856485
+89,"see diagram ""example of a dead position"".",True,True,31.29548657977397
+90,"==== draws ====
+
+the game ends in a draw if any of these conditions occur:
+
+the game is automatically a draw if the player to move is not in check and has no legal move.",True,False,24.113342191294166
+91,this situation is called a stalemate.,True,True,36.28402462749781
+92,an example of such a position is shown in the adjacent diagram.,True,False,17.20612112088936
+93,the game is immediately drawn for a dead position.,True,True,31.12647961694224
+94,both players agree to a draw after one of the players makes such an offer.,True,False,26.818522859947986
+95,"the player having the move may claim a draw by declaring that one of the following conditions exists, or by declaring an intention to make a move which will bring about one of these conditions.",True,False,19.298835593392678
+96,"if the claim is proven true, the game is drawn:the same board position has occurred three times with the same player to move and all pieces having the same rights to move, including the right to castle or capture en passant (see threefold repetition rule).",True,True,32.398766086731364
+97,"there has been no capture or pawn move in the last fifty moves by each player, if the last move was not a checkmate (see fifty-move rule).",True,False,20.717192145997142
+98,"the game ends immediately with a draw by the intervention of the arbiter, without a draw request necessary:
+when the same board position has occurred five times (see fivefold repetition rule).",True,False,23.839158451214935
+99,"when the moves without capture or pawn move extend up to seventy-five (see seventy-five-move rule).at one time, if a player was able to check the opposing king continually (perpetual check) and the player indicated their intention to do so, the game was drawn.",True,True,32.23396686982143
+100,"this rule is no longer in effect; however, players will usually agree to a draw in such a situation, since either the rule on threefold repetition or the fifty-move rule will eventually be applicable (staunton 1847:21–22), (reinfeld 1954:175).",True,False,25.949571488947157
+101,"==== flag-fall ====
+a game played under time control will end as a loss for a player who uses up all of their allotted time, which is called flag-fall, unless the opponent cannot possibly checkmate him (see timing).",True,False,24.50028935111445
+102,there are different types of time control.,True,True,33.66242084364079
+103,players may have a fixed amount of time for the entire game or they may have to make a certain number of moves within a specified time.,True,False,18.83007498204884
+104,"also, a small increment of time may be added for each move made.",True,False,25.556220689600362
+105,"== competition rules ==
+the following rules are the rules used for ""over the board"" (otb) games.",True,False,26.38849512648165
+106,"they are defined by the fide laws of chess.. the fide laws of chess define the rules for standard chess, rapid chess, blitz chess and guidelines for chess960.",True,False,26.456258688624718
+107,some rules are specifically adapted for disabled players.,True,False,21.18652799275313
+108,"as the rules cover otb play, they cannot be directly applied to computer chess or online chess, played on a computer device.",True,False,18.68092158186078
+109,the rules for correspondence chess are defined by the iccf.,True,False,23.217554942857564
+110,"=== moving the pieces ===
+the movement of pieces is to be done with one hand.",True,True,34.47910958874522
+111,"once the hand is taken off a piece after moving it, the move cannot be retracted unless the move is illegal.",True,False,18.143449764533322
+112,"when castling, the player should first move the king with one hand and then move the rook with the same hand (schiller 2003:19–20).",True,False,24.036012148733157
+113,"in the case of a pawn promotion, if the player releases the pawn on the eighth rank, the player must promote the pawn.",True,False,22.13475521323262
+114,"after the pawn has moved, the player may touch any piece not on the board and the promotion is not finalized until the new piece is released on the promotion square (just 2014).",True,False,24.69548645428403
+115,"=== touch-move rule ===
+
+in serious play, if a player having the move touches a piece as if having the intention of moving it, then the player must move it if it can be legally moved.",True,False,23.48057356471495
+116,"so long as the hand has not left the piece on a new square, any legal move can be made with the piece.",True,False,24.713984239328067
+117,if a player touches one of the opponent's pieces then that piece must be captured if there is a legal move that does so.,True,False,23.90929053959157
+118,if none of the touched pieces can be moved or captured there is no penalty (schiller 2003:19–20).,True,False,16.084039172613107
+119,"when castling, the king must be the first piece touched.",True,True,31.61100661342573
+120,"if the player touches the king and a rook, the player must castle with that rook if it is legal to do so.",True,False,29.762400621633716
+121,"if the player completes a two-square king move without touching a rook, the player must move the correct rook accordingly if castling in that direction is legal.",True,False,20.901694455131665
+122,"if a player starts to castle illegally, another legal king move must be made if possible, including castling with the other rook (schiller 2003:20).",True,False,21.362193266654838
+123,"if a player moves a pawn to its eighth rank, it cannot be substituted for a different move of the pawn when the player has stopped touching it.",True,False,19.895330579376783
+124,"however, the move is not complete until the promoted piece is released on that square.",True,False,20.665571770253017
+125,"if a player wishes to touch a piece with the intention of adjusting its position on a square, the player must first alert the opponent of this intention by saying j'adoube or ""i adjust"".",True,False,23.087172334274182
+126,"once the game has started, only the player with the move may touch the pieces on the board (schiller 2003:19–20).",True,False,21.836095069696718
+127,"=== timing ===
+
+tournament games are played under time constraints, called time controls, using a chess clock.",True,False,22.08222969275887
+128,players must make their moves within the time control or forfeit the game.,True,False,26.683566953049723
+129,there are different types of time controls applied.,True,False,23.427597652872855
+130,"for standard chess, different periods can be defined with different fixed times (e.g.",True,False,19.882309967530407
+131,"first 40 moves in 100 minutes, next 20 moves in 50 minutes, remaining moves in 15 minutes).",True,False,12.821966444550426
+132,"for rapid and blitz chess, only one period can be defined where all moves must be performed.",True,False,11.517826717529564
+133,"additionally, an increment or delay per move may be defined.",True,False,14.06267750637877
+134,"when a player runs out of time, this event is called flag fall.",True,False,21.9784776490873
+135,"a flag fall has no consequences unless stated as observed by the arbiter, in which case the arbiter must intervene, or claimed by a player.",True,False,19.63249013178275
+136,"when no flag fall is stated, and one of the following events occur, the result of the game still holds.",True,False,18.358894277118726
+137,"it is of no relevance if the player runs out of time afterwards, or has already run out of time, but this was not stated:
+if a player delivers a checkmate, the game is over and that player wins.",True,False,23.6514579135035
+138,"if a move results in a stalemate, dead position, fivefold repetition or the seventy-five-move rule applies, the game is over and the game is drawn.",True,False,22.603735939819455
+139,"if a player claims flag fall and is himself not out of time, then he wins the game if he still theoretically could checkmate the opponent; otherwise the game is a draw.the united states chess federation (uscf) rule is different.",True,False,27.818141899323926
+140,"uscf rule 14e defines ""insufficient material to win on time"", that is lone king, king plus knight, king plus bishop, and king plus two knights opposed by no pawns, and there is no forced win in the final position.",True,True,36.11390757329327
+141,"hence to win on time with this material, the uscf rule requires that a win can be forced from that position, while the fide rule merely requires a win to be possible.",True,False,23.26085786610405
+142,(see monika soćko rules appeal in 2008 and women's world chess championship 2008 for a famous instance of this rule.),True,False,19.557693893912962
+143,"with mechanical clocks only, flag fall for both players can occur.",True,False,21.091532146368298
+144,"with digital clocks, the clock indicates which flag fell first, and this information is valid.",True,False,13.04255666827703
+145,"if a flag fall is stated, and as can happen with mechanical clocks only, the flag fall happened for both players, then:if it can be established which player ran out of time first, the rules apply for flag fall for one player only.",True,False,28.8783574472635
+146,"otherwise, the result is a draw, unless this is a standard chess game which is not in the last period, here the play will be resumed.in the last period of a standard chess game or rapid games, if played without increment, a special set of rules applies regarding the clock, referenced as ""quickplay finishes"".",True,True,38.22439182180693
+147,"these rules allow a player with under two minutes time to request an increment introduced, or request a draw based on claiming no progress or no effort, to be ruled by the arbiter.",True,False,21.848070521327323
+148,"these rules have been relevant when playing with mechanical clocks, which do not allow setting an increment and are today with digital clocks of second importance only, as playing with increment is recommended.",True,False,20.309015790087933
+149,"=== recording moves ===
+
+each square of the chessboard is identified with a unique pair of a letter and a number.",True,False,10.580023760695829
+150,"the vertical files are labeled a through h, from white's left (i.e.",True,False,12.822599873081773
+151,the queenside) to white's right.,True,True,30.58559100745683
+152,"similarly, the horizontal ranks are numbered from 1 to 8, starting from the one nearest white's side of the board.",True,False,14.261483075239648
+153,"each square of the board, then, is uniquely identified by its file letter and rank number.",True,False,14.28754340232022
+154,"the white king, for example, starts the game on square e1.",True,False,21.111612196983433
+155,the black knight on b8 can move to a6 or c6.,True,False,13.276533775851219
+156,"in formal competition, each player is obliged to record each move as it is played in a chess notation in order to settle disputes about illegal positions, overstepping time control, and making claims of draws by the fifty-move rule or repetition of position.",True,True,32.225774178728656
+157,algebraic chess notation is the accepted standard for recording games today.,True,False,17.69061100166426
+158,there are other systems such as iccf numeric notation for international correspondence chess and the obsolete descriptive chess notation.,True,False,15.679304505696452
+159,"the current rule is that a move must be made on the board before it is written on paper or recorded with an electronic device.both players should indicate offers of a draw by writing ""="" at that move on their score sheet (schiller 2003:27).",True,False,22.93383335122131
+160,notations about the time on the clocks can be made.,True,True,47.303365583708896
+161,"if a player has less than five minutes left to complete all of their moves, they are not required to record the moves (unless a delay of at least thirty seconds per move is being used).",True,False,16.296277962309873
+162,the score sheet must be made available to the arbiter at all times.,True,False,14.513570372302706
+163,a player may respond to an opponent's move before writing it down (schiller 2003:25–26).,True,False,19.674743081931318
+164,"=== adjournment ===
+see adjournment § chess.",True,False,29.902576470736435
+165,"=== irregularities ===
+
+
+==== illegal move ====
+a player who makes an illegal move must retract that move and make a legal move.",True,False,20.527093672985906
+166,"that move must be made with the same piece if possible, because the touch-move rule applies.",True,False,23.129421462989903
+167,"if the illegal move was an attempt to castle, the touch-move rule applies to the king but not to the rook.",True,False,18.16545253560954
+168,the arbiter should adjust the time on the clock according to the best evidence.,True,False,14.039613537186973
+169,"if the mistake is only noticed later on, the game should be restarted from the position in which the error occurred.",True,False,12.502482891643544
+170,some regional organizations have different rules.a player may correct an illegal move if the player has not pressed their clock.,True,False,17.7368386256375
+171,"if a player has pressed their clock, the illegal move may be stated by the arbiter intervening or by the opponent claiming the illegal move.",True,False,19.383341333001923
+172,"if the arbiter does not intervenes and the opponent moves, the illegal move is accepted and without penalty.according to the fide laws of chess, the first stated completed illegal move results in a time penalty.",True,False,23.387202382897065
+173,"the time penalty consists of giving the opponent two minutes extra time in standard and rapid chess, one minute extra time in blitz.",True,False,22.858214955683156
+174,"the second stated completed illegal move by the same player results in the loss of the game, unless the position is such that it is impossible for the opponent to win by any series of legal moves (e.g.",True,False,23.25978266552924
+175,if the opponent has a bare king) in which case the game is drawn.,True,False,25.697724133167533
+176,a move is completed when it has been made and the player has pressed the clock.,True,False,24.470696658331306
+177,"==== illegal position ====
+if it is discovered during the game that the starting position was incorrect, the game is restarted.",True,False,18.575087076553434
+178,"if it is discovered during the game that the board is oriented incorrectly, the game is continued with the pieces transferred to a correctly oriented board.",True,False,18.478723647852192
+179,"if the game starts with colours reversed, the game is restarted if less than 10 moves have been made by both players, otherwise the game is continued.",True,False,18.723891357579607
+180,"some regional organizations have different rules.if a player knocks over pieces, it is their responsibility to restore them to their correct position on their time.",True,False,17.596642815035555
+181,"if it is discovered that an illegal move has been made, or that pieces have been displaced, the game is restored to the position before the irregularity.",True,False,17.337836954132644
+182,"if that position cannot be determined, the game is restored to the last known correct position.",True,False,19.57194628506341
+183,"=== conduct ===
+players may not use any notes, outside sources of information (including computers), or advice from other people.",True,False,13.624679627039422
+184,analysis on another board is not permitted.,True,False,18.226328797629492
+185,"scoresheets are to record objective facts about the game only, such as time on the clock or draw offers.",True,False,16.972755339428684
+186,players may not leave the competition area without permission of the arbiter (schiller 2003:30–31).,True,False,16.97286752518465
+187,high standards of etiquette and ethics are expected.,True,False,8.920093404150522
+188,players should shake hands before and after the game.,True,True,36.4377122426412
+189,"generally a player should not speak during the game, except to offer a draw, resign, or to call attention to an irregularity.",True,False,15.89788448481252
+190,"an announcement of ""check"" is commonly made in informal games but is not recommended in officially sanctioned games.",True,False,15.605228103273038
+191,"a player may not distract or annoy another player by any means, including repeatedly offering a draw (schiller 2003:30–31,49–52).",True,False,17.238823240796652
+192,"due to increasing concerns about the use of chess engines and outside communication, mobile phone usage is banned.",True,False,12.662632839496103
+193,"the first forfeit by a high-profile player, for their phone ringing during play, occurred in 2003. in 2014 fide extended this to ban all mobile phones from the playing area during chess competitions, under penalty of forfeiture of the game or even expulsion from the tournament.",True,False,10.786021747969375
+194,"however, the rules also allow for less rigid enforcement in amateur events.",True,False,10.517063541102615
+195,"== equipment ==
+
+the size of the squares of the chessboard should be approximately 1.25 to 1.3 times the diameter of the base of the king, or 50 to 65 mm.",True,False,16.387218177122637
+196,squares of approximately 57 mm (​2 1⁄4 inches) normally are well-suited for pieces with the kings in the preferred size range.,True,False,16.411666273301684
+197,the darker squares are usually brown or green and the lighter squares are off-white or buff.,True,False,13.197059274508412
+198,pieces of the staunton chess set design are the standard and are usually made of wood or plastic.,True,False,17.42020082821755
+199,"they are often black and white; other colors may be used (like a dark wood or even red for the dark pieces) but they would still be called the ""white"" and ""black"" pieces (see white and black in chess).",True,False,25.964564036646905
+200,the height of the king should be 85 to 105 millimetres (3.35–4.13 inches).,True,False,8.077690818768005
+201,a height of approximately 95 to 102 mm (​3 3⁄4–4 inches) is preferred by most players.,True,False,11.000337812979536
+202,the diameter of the king should be 40 to 50% of its height.,True,False,8.865256888281108
+203,the size of the other pieces should be in proportion to the king.,True,False,21.832618995280548
+204,"the pieces should be well balanced (just 2014).in games subject to time control, a chess clock is used, consisting of two adjacent clocks and buttons to stop one clock while starting the other, such that the two component clocks never run simultaneously.",True,True,31.877882481030777
+205,the clock can be analog or digital though a digital clock is highly preferred under both uscf and fide rulesets.,True,False,15.060990094134086
+206,this is since most tournaments now include either an increment (extra time being added prior or after the move) or delay (a countdown to when a clock starts again) to their time controls.,True,False,18.99499514065845
+207,"before the start of the game, either the arbiter decides, or whoever is playing black, where the chess clock is placed.",True,False,19.940547295176415
+208,"== history ==
+the rules of chess have evolved much over the centuries from the early chess-like games played in india in the 6th century.",True,False,19.748553835662175
+209,for much of that time the rules have varied from area to area.,True,False,29.490900454057627
+210,"the modern rules first took form in italy during the 13th century, giving more mobility to pieces that previously had more restricted movement (such as the queen and bishop).",True,False,20.552190204511845
+211,"such modified rules entered into an accepted form during the late 15th century (hooper & whyld 1992:41,328) or early 16th century (ruch 2004).",True,False,20.483906610607438
+212,"the basic moves of the king, rook, and knight are unchanged.",True,False,20.82821113751093
+213,pawns originally did not have the option of moving two squares on their first move and promoted only to a queen if they reached the eighth rank.,True,False,16.816249013119148
+214,"the queen was originally the fers or farzin, which could move one square diagonally in any direction.",True,False,13.23565961827792
+215,"in european chess it became able to leap two squares diagonally, forwards, backwards, or to left or right on its first move; some areas also gave this right to a newly promoted pawn.",True,False,22.248709927218403
+216,"in the persian and arabic game the bishop was a pīl (persian) or fīl (arabic) (meaning ""elephant"") which moved two squares diagonally with jump (davidson 1949:13).",True,False,21.66031337419332
+217,in the middle ages the pawn could only be promoted to the equivalent of a queen (which at that time was the weakest piece) if it reached its eighth rank (davidson 1949:59–61).,True,False,19.675722922322198
+218,"during the 12th century the squares on the board sometimes alternated colors, and this became the standard in the 13th century (davidson 1949:146); whence the word ""chequered""/""checkered"".",True,False,18.302329418422097
+219,between 1200 and 1600 several laws emerged that drastically altered the game.,True,False,13.629206062439563
+220,checkmate became a requirement to win; a player could not win by capturing all of the opponent's pieces.,True,False,22.01140611187316
+221,"stalemate was added, although the outcome has changed several times (see history of the stalemate rule).",True,False,19.622910071346553
+222,"pawns gained the option of moving two squares on their first move, and the en passant rule was a natural consequence of that new option.",True,False,19.887744964583465
+223,the king and rook acquired the right to castle (see variations throughout history of castling for different versions of the rule).,True,False,21.76904916711504
+224,"between 1475 and 1500 the queen and the bishop also acquired their current moves, which made them much stronger pieces (davidson 1949:14–17).",True,False,14.688933435757473
+225,when all of these changes were accepted the game was in essentially its modern form (davidson 1949:14–17).,True,False,13.009662139661009
+226,the rules for pawn promotion have changed several times.,True,False,29.448371170906707
+227,"as stated above, originally the pawn could only be promoted to the queen, which at that time was a weak piece.",True,False,18.95618151967252
+228,"when the queen acquired its current move and became the most powerful piece, the pawn could then be promoted to a queen or a rook, bishop, or knight.",True,False,21.41588239226703
+229,"in the 18th century rules allowed only the promotion to a piece already captured, e.g.",True,False,18.951802473861267
+230,the rules published in 1749 by françois-andré danican philidor.,True,False,16.36020613796537
+231,"in the 19th century this restriction was lifted, which allowed for a player to have more than one queen, e.g.",True,False,16.26287051832853
+232,the 1828 rules by jacob sarratt (davidson 1949:59–61).,True,False,12.166586234603196
+233,"two new rules concerning draws were introduced, each of which have changed through the years:
+
+the threefold repetition rule was added, although at some times up to six repetitions have been required, and the exact conditions have been specified more clearly (see threefold repetition#history).",True,True,31.228244488065425
+234,the fifty-move rule was also added.,True,False,28.053107888764632
+235,"at various times, the number of moves required was different, such as 24, 60, 70, or 75. for several years in the 20th century, the standard fifty moves was extended to one hundred moves for a few specific endgames (see fifty-move rule's history).another group of new laws included (1) the touch-move rule and the accompanying ""j'adoube/adjust"" rule; (2) that white moves first (in 1889); (3) the orientation of the board; (4) the procedure if an illegal move was made; (5) the procedure if the king had been left in check for some moves; and (6) issues regarding the behavior of players and spectators.",True,True,98.79565354047693
+236,the staunton chess set was introduced in 1849 and it became the standard style of pieces.,True,False,17.577662073169144
+237,"the size of pieces and squares of the board was standardized (hooper & whyld 1992:220–21, laws, history of).",True,False,20.171455287760857
+238,"until the middle of the 19th century, chess games were played without any time limit.",True,False,23.058176395967205
+239,"in an 1834 match between alexander mcdonnell and louis-charles mahé de la bourdonnais, mcdonnell took an inordinate amount of time to move, sometimes up to 1½ hours.",True,False,14.904005206236564
+240,"in 1836 pierre charles fournier de saint-amant suggested a time limit, but no action was taken.",True,False,11.938740415296843
+241,"at the 1851 london tournament, staunton blamed his loss in his match against elijah williams  on williams' slow play; one game was adjourned for the day after only 29 moves.",True,False,20.45946959864206
+242,the next year a match between daniel harrwitz and johann löwenthal used a limit of 20 minutes per move.,True,False,11.96486608608074
+243,the first use of a modern-style time limit was in an 1861 match between adolph anderssen and ignác kolisch (sunnucks 1970:459).,True,False,14.418971745576984
+244,"=== codification ===
+
+the first known publication of chess rules was in a book by luis ramírez de lucena about 1497, shortly after the movement of the queen, bishop, and pawn were changed to their modern form (just 2014).",True,False,28.16945023877292
+245,ruy lópez de segura gave rules of chess in his 1561 book libro de la invencion liberal y arte del juego del axedrez (sunnucks 1970:294).,True,False,24.119604157434424
+246,"in the 16th and 17th centuries, there were local differences concerning rules such as castling, pawn promotion, stalemate, and en passant.",True,False,19.886027529328427
+247,some of these differences persisted until the 19th century (harkness 1967:3); for example differences in castling rules persisted in italy until the late 19th century.,True,False,20.62830189204504
+248,"as chess clubs arose and tournaments became common, there was a need to formalize the rules.",True,False,14.763630525048386
+249,"in 1749 philidor (1726–1795) wrote a set of rules that were widely used, as well as rules by later writers such as the 1828 rules by jacob sarratt (1772–1819) and rules by george walker (1803–1879).",True,False,26.211940659253674
+250,"in the 19th century, many major clubs published their own rules, including the hague in 1803, london in 1807, paris in 1836, and st. petersburg in 1854. in 1851 howard staunton (1810–1874) called for a ""constituent assembly for remodeling the laws of chess"" and proposals by tassilo von heydebrand und der lasa (1818–1889) were published in 1854. staunton had published rules in chess player's handbook in 1847, and his new proposals were published in 1860 in chess praxis; they were generally accepted in english-speaking countries.",True,True,31.574634531129952
+251,"german-speaking countries usually used the writings of chess authority johann berger (1845–1933) or handbuch des schachspiels by paul rudolf von bilguer (1815–1840), first published in 1843.
+in 1924, fédération internationale des échecs (fide) was formed and in 1929 it took up the task of standardizing the rules.",True,False,11.337575878122243
+252,"at first fide tried to establish a universal set of rules, but translations to various languages differed slightly.",True,False,14.098712479894749
+253,"although fide rules were used for international competition under their control, some countries continued to use their own rules internally (hooper & whyld 1992:220–21).",True,False,21.578657400533586
+254,in 1952 fide created the permanent commission for the rules of chess (also known as the rules commission) and published a new edition of the rules.,True,False,23.142685936027927
+255,"the third official edition of the laws was published in 1966. the first three editions of the rules were published in french, with that as the official version.",True,False,20.186122042327305
+256,in 1974 fide published the english version of the rules (which was based on an authorized 1955 translation).,True,False,15.089699797273454
+257,"with that edition, english became the official language of the rules.",True,False,19.021336027309385
+258,"another edition was published in 1979. throughout this time, ambiguities in the laws were handled by frequent interpretations that the rules commission published as supplements and amendments.",True,False,20.35473824416259
+259,in 1982 the rules commission rewrote the laws to incorporate the interpretations and amendments (fide 1989:7–8).,True,False,14.652987083143174
+260,"in 1984 fide abandoned the idea of a universal set of laws, although fide rules are the standard for high-level play (hooper & whyld 1992:220–21).",True,False,22.184889670058293
+261,"with the 1984 edition, fide implemented a four-year moratorium between changes to the rules.",True,False,13.929657781684895
+262,"other editions were issued in 1988 and 1992 (fide 1989:5), (just 2014).",True,False,14.99233666480191
+263,"the rules of national fide affiliates (such as the united states chess federation, or uscf) are based on the fide rules, with slight variations (just 2014).",True,False,23.237892666904276
+264,"kenneth harkness published popular rulebooks in the united states starting in 1956, and the uscf continues to publish rulebooks for use in tournaments it sanctions.",True,False,19.021399443638195
+265,"in 2008, fide added the variant chess960 to the appendix of the ""laws of chess"".",True,False,18.075783123741264
+266,"chess960 uses a random initial set-up of main pieces, with the conditions that the king is placed somewhere between the two rooks, and bishops on opposite-color squares.",True,False,19.25792653894833
+267,"the castling rules are extended to cover all these positions.in the 21st century, rules about such things as mobile phones and unauthorised use of chess engines were introduced.",True,False,21.532239174862323
+268,"== variations ==
+from time to time, rules have been introduced at certain tournaments to discourage players from agreeing to short draws.",True,False,19.91135301330538
+269,"one such case was the ""no drawing or resigning during the first 30 moves"" rule used at the 2009 london chess classic.",True,False,16.55929376070198
+270,"== see also ==
+
+specific rules
+
+
+== notes ==
+
+
+== references ==
+burgess, graham (2009), the mammoth book of chess (3rd ed.",True,False,14.855853855826629
+271,"), running press, isbn 978-0-7624-3726-9
+davidson, henry (1949), a short history of chess (1981 ed.",True,False,15.822174969019727
+272,"), mckay, isbn 0-679-14550-8
+fide (1989), the official laws of chess, macmillan, isbn 0-02-028540-x
+fide (2008), fide laws of chess, fide, isbn 978-0-9594355-2-8, retrieved 2008-09-10
+harkness, kenneth (1967), official chess handbook, mckay
+hooper, david; whyld, kenneth (1996) [first pub.",True,True,54.00544938356335
+273,"1992], the oxford companion to chess (2nd ed.",True,False,10.712009185966666
+274,"), oxford university press, isbn 0-19-280049-3
+just, tim (2014), u.s. chess federation's official rules of chess (6th ed.",True,False,23.39188393157677
+275,"), mckay, isbn 978-0-8129-3559-2
+polgar, susan; truong, paul (2005), a world champion's guide to chess, random house, isbn 978-0-8129-3653-7
+reinfeld, fred (1954), how to be a winner at chess, fawcett, isbn 0-449-91206-x
+ruch, eric (2004), the italian rules, iccf, retrieved 2008-09-10
+schiller, eric (2003), official rules of chess (2nd ed.",True,True,65.22725790257518
+276,"), cardoza, isbn 978-1-58042-092-1
+staunton, howard (1847), the chess-player's handbook, london: h. g. bohn, pp.",True,False,16.014402625456526
+277,"21–22, isbn 0-7134-5056-8 (1985 batsford reprint, isbn 1-85958-005-x)
+sunnucks, anne (1970), the encyclopaedia of chess, st. martin's press (2nd ed.",True,False,23.47419736523887
+278,"), isbn 978-0-7091-4697-1
+timman, jan (2005), curaçao 1962: the battle of minds that shook the chess world, new in chess, isbn 978-90-5691-139-3
+
+
+== further reading ==
+golombek, harry, ed.",True,False,25.500052858547576
+279,"(1976), the laws of chess and their interpretations, pitman, isbn 0-273-00119-1
+golombek, harry (1977), golombek's encyclopedia of chess, crown publishing, isbn 0-517-53146-1
+harkness, kenneth (1970), official chess rulebook, mckay, isbn 0-679-13028-4
+
+
+== external links ==
+fide laws of chess
+fide standards of chess equipment, venue for fide tournaments, rate of play and tie-break regulations
+uscf learn to play chess
+uscf clock rules",True,True,87.42609919667208
+280,the grand mansion gate (chinese: 大宅门) is a 2001 chinese historical television series written and directed by guo baochang.,False,False,0.019417475728155338
+281,guo is also the author of the original novel of the same name.,False,False,0.4444444444444444
+282,"the television series stars siqin gaowa, chen baoguo, liu peiqi, du yulu, he saifei, jiang wenli, and zhang fengyi.",False,False,0.05925925925925926
+283,prominent chinese directors zhang yimou and chen kaige also make cameo appearances.,False,False,0.997202518913481
+284,guo baochang spent over 40 years writing the script for film.,False,False,1.3698454695088522
+285,"guo had sole discretion with the early script, and eventually wrote approximately 4 drafts.",False,False,0.24074074074074073
+286,"the television series began production in 2000 and finished filming in 2001. a second season was completed in 2003.
+the grand mansion gate details the story of the rise and fall of the time-honored brand baicao hall and the frustrations and fates of three generations of the bai family.the series premiered on cctv-1 in mainland china on 15 april 2001 and in hong kong on june 4.",False,False,0.1236988770932615
+287,"== synopsis ==
+in 1880 during the 6th year of the guangxu period of the qing dynasty, bai jingqi (chen baoguo) is born into the baicao hall, a prominent merchant family in beijing.",False,False,0.031746031746031744
+288,the first season chronicles the lives of bai jingqi's predecessors in the late qing and early republic of china before focusing on bai jingqi when he becomes the new family patriarch.,False,False,1.0442009189885533
+289,the subsequent season details his later life after the second sino-japanese war through to the establishment of the people's republic of china.,False,False,1.1957544080622784
+290,"== cast ==
+
+
+=== main ===
+chen baoguo as bai jingqi (白景琦), liu cihang and wang cihang portray bai jingqi as a child.the series' main protagonist, patriarch and head of the baicao hall.",False,False,0.04048582995951417
+291,"born to bai yingxuan and his wife wen shi, jingqi never once cried in his childhood years, and was branded by his uncle bai yingyu as an unlucky omen.",False,False,0.0728476821192053
+292,he succeeded his mother as the head of the baicao hall.,False,False,0.07142857142857142
+293,"notoriously hot-tempered, jingqi maintains a strict grip on the family and its influence as years of revolution and instability plaguing china in the late 19th to mid-20th century tests the prestige of his time-honored family name.he saifei as yang jiuhong (杨九红).one of bai jingqi's concubines, who was formerly a prostitute.",False,False,0.4122751340015949
+294,"yang's status as a former prostitute results in years of disdain and abuse by the bai family, notably from jingqi's mother, bai wen shi.",False,False,1.7163855675856272
+295,"the series marks the second time he and zhang yimou are working together, having worked together ten years prior on the set of his film raise the red lantern, where she played a similar character of low-social status struggling against members of a wealthy household.xie lan as li xiangxiu (李香秀).bai jingqi's second wife, originally a servant girl sold to the bai family by her parents.",False,False,0.43087038810650047
+296,"her years as a servant girl allowed her to see the bitter rivalries surrounding jingqi and his concubines, which she uses to her advantage.",False,False,0.09259259259259259
+297,"she begins an affair with bai jingqi and uses his favor to maneuver her way into becoming his second wife, thus granting her a higher title and status, notably over yang jiuhong, whose relentless bullying and abuse of another concubine resulted in the latter committing suicide.siqin gaowa as mrs. bai (bai wen shi) (白文氏).bai jingqi's mother and his predecessor as head of the bai family.",False,False,0.12238191497390685
+298,"her role was aggressively challenged by wealthy patriarchs, including her own brother-in-law bai yingyu, but upon successfully defending the family's secret medicinal formula from scheming entrepreneurs, she became the unquestioned matriarch of the baicao hall.",False,False,0.6022046693888577
+299,"she maintained the assets, wealth and prestige of the family, amassing influence by currying favor with imperial eunuchs of the qing court, and outmaneuvering members of the manchu nobility.liu peiqi as bai yingyu (白颖宇).bai jingqi's uncle, spoiled in his childhood by his mother and overprotected in adulthood by his eldest brother, bai yingyu was a thrifty spender who rarely cared about the devastating effects brought to the bai family.",False,False,0.09357021282601162
+300,"he became an entrepreneur, sponsoring brothels and fought bitterly against his sister-in-law wen shi, plotting to steal the family's secret medicinal formula to drive the baicao hall out of business, and taking her son jingqi to a brothel when he was a child.",False,False,0.29124795486314375
+301,"=== the bai family ===
+du yulu as bai mengtang (白萌堂), bai jingqi's paternal grandfather, the head of the baicao hall at the start of the series.",False,False,0.9393622930844625
+302,"wang liyuan as mrs. bai (bai zhou shi) (白周氏), bai jingqi's paternal grandmother.",False,False,0.9667396525090391
+303,"li hongtao as bai yingyuan (白颖园), bai mengtang's eldest son.",False,False,1.6994922532225556
+304,"zhao lingqi as mrs. bai (bai yin shi) (白殷氏), bai yingyuan's wife.",False,False,1.1609745256106059
+305,"bi yanjun as bai yingxuan (白颖轩), bai mengtang's second son and bai jingqi's father.",False,False,1.7242195924909989
+306,"liu peiqi as bai yingyu (白颖宇), bai mengtang's youngest son.",False,False,1.605152630581046
+307,"zhang yan as mrs. bai (bai fang shi) (白方氏), bai yingyu's wife.",False,False,1.1343078589439393
+308,"li ping as bai yaping (白雅萍), bai mengtang's youngest child and only daughter.",False,False,1.3917670221999288
+309,"jia xinguang as bai jingyi (白景怡), bai yingyuan's eldest son.",False,False,1.605152630581046
+310,"shang ying as wu cuigu (乌翠姑), bai jingyi's wife.",False,False,1.9334793050180783
+311,xu boping as young bai jingyi.,False,False,0.0
+312,"cheng xiangyin as bai jingshuang (白景双), bai yingyu's eldest son.",False,False,1.605152630581046
+313,"ai liya as bai yufen (白玉芬), bai yingyuan's daughter.",False,False,2.0249555679254754
+314,geng sisi as young bai yufen.,False,False,0.0
+315,"li shusheng as bai jingsi (白景泗), bai yingyuan's second son.",False,False,1.7183601777508575
+316,wu jianing as young bai jingsi.,False,False,0.0
+317,"liu chao as bai jingwu (白景武), bai yingyu's second son.",False,False,1.6240205551093478
+318,wang chaoqun as young bai jingwu.,False,False,0.0
+319,"li xiaolei as bai jinglu (白景陆), bai yingyuan's third son.",False,False,2.0947230097859406
+320,chen weiyou as young bai jinglu.,False,False,0.0
+321,"ru ping as huang chun (黄春), bai jingqi's wife.",False,False,2.024388395927169
+322,chen lingyue as young huang chun.,False,False,0.0
+323,"lei juan as huai hua (槐花), bai jingqi's second concubine and a former servant girl.",False,False,1.0918583041661745
+324,"jiang wenli as bai yuting (白玉婷), bai yingxuan's youngest daughter.",False,False,1.5674167815244422
+325,ma sichun as young bai yuting.,False,False,0.35714285714285715
+326,"ji baozhong as bai jingsheng (白敬生), bai jingyi's eldest son.",False,False,1.605152630581046
+327,"zhao yi as bai jingye (白敬业), bai jingqi and huang chun's eldest son.",False,False,1.1456985450104664
+328,"zhang yang as bai jinggong (白敬功), bai jingqi and huang chun's second son.",False,False,1.1325406502736242
+329,"zhang dinghan as bai jiali (白佳莉), bai jingqi and yang jiuhong's daughter.",False,False,1.2980170221999288
+330,"liu lingzhi as bai zhanyuan (白占元), bai jingqi's grandson and bai jingye's eldest son.",False,False,1.6648136518969394
+331,"=== supporting ===
+zhang fengyi as ji zengbu (季宗布), bai jingqi's teacher and a military officer in the royal guard divine engine division.",False,False,0.5596913777683911
+332,"zheng had worked alongside many of the main and supporting cast members, notably siqin gaowa and chen kaige.",False,False,0.09090909090909091
+333,yu rongguang as bai hua.,False,False,0.0
+334,"li xuejian as master yu (于八爷), a drug dealer in beijing.",False,False,0.14285714285714285
+335,"lei kesheng as wang xiguang (王喜光), an imperial eunuch.",False,False,0.0
+336,yuan zi as young wang xiguang.,False,False,0.14285714285714285
+337,"ning jing as zhen'er (珍儿), madam of the brothel yang jiuhong worked at.",False,False,0.09090909090909091
+338,"zhang yimou as li lianying, an imperial eunuch of the empress dowager.",False,False,0.14285714285714285
+339,chen kaige as an official in the local government.,False,False,3.2087361344269345
+340,"he qun as pitou'er (皮头儿), a worker at a pawnshop.",False,False,0.0
+341,"tian zhuangzhuang as taki (田木), a japanese military officer.",False,False,0.0
+342,"== production ==
+
+
+=== conception and development ===
+in 1959 at the age of 19, guo baochang entered beijing film academy and began to write the novel the grand mansion gate.",False,False,0.06470588235294118
+343,"at the dawn of the cultural revolution, he was labeled as a ""reactionary student"" and was sent to nankou farm of beijing to reform through labor.",False,False,0.1262135922330097
+344,"in order to avoid the attention of the red guards, he burned the original manuscript.",False,False,0.22857142857142856
+345,in march 1969 he rewrote the novel.,False,False,0.1111111111111111
+346,in 1980 he divorced his wife and the novel was burned by the furious woman.,False,False,0.17142857142857143
+347,"at the end of 1994, he rewrote the novel for the third and final time.baicao hall (百草厅) took inspiration from tong ren tang, one of the time-honored pharmaceutical companies in china founded at the beginning of the qing dynasty and which has lasted for almost 350 years.",False,False,0.22510232295479662
+348,guo baochang himself had lived there for more than 26 years.,False,False,0.35714285714285715
+349,"the main character bai jingqi was inspired by yue jingyu (乐镜宇), guo baochang's foster father and founder of the hong ji tang pharmaceutical company.",False,False,0.4357564087119399
+350,"the characters bai yuting and li xiangxiu were inspired by guo's twelfth aunt and a concubine of yue jingyu's, respectively.",False,False,1.4842896511999226
+351,"=== casting ===
+directors zhang yimou, chen kaige, he qun and tian zhuangzhuang joined the cast.",False,False,0.06153846153846154
+352,"actors yu rongguang, li xuejian, ning jing and lei kesheng were cast in supporting roles for the series.",False,False,0.15555555555555556
+353,"=== filming ===
+principal photography started in 2000 and wrapped in 2001.",False,False,0.037037037037037035
+354,"== music ==
+
+
+== broadcast ==
+the grand mansion gate was broadcast in mainland china in april 2001 and two months later was aired in hong kong.",False,False,0.08
+355,"== references ==
+
+
+== external links ==
+the grand mansion gate on imdb
+the grand mansion gate at douban (in chinese)
+the grand mansion gate at the mtime.com (in chinese)",False,False,0.04912537499817403

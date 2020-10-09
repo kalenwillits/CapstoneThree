@@ -25,8 +25,11 @@ read_article = None
 read_article_name = 'rules of chess'
 user_article = None
 train_article = None
-train_article_name = None
-vectors = None
+train_article_name = 'train_sample'
+vectors = 1
+test_df = {'user_article':[0],'type':[0],'predict':[0],'score':[0]}
+test_name = 'model_metrics'
+parameters = {}
 
 
 def load_wiki_article(article_name=read_article_name, cd_data=cd_data):
@@ -126,7 +129,7 @@ def sent_tokenize_plus(doc):
 def one_hot(doc):
     """
     Uses the previous "tolest" function and one_hot encodes them
-    using the Pandas.get_dummies method. Returns a Pandas dataframe.
+    using the Pandas.get_dummies method. Returns a Pandas DataFrame.
     """
     doc_stop = tolest(doc)
     df_1h = pd.get_dummies(doc_stop)
@@ -213,11 +216,6 @@ def calculate_query(grams=grams,
         query_score[gram] = 0
 
     for gram in grams:
-        #
-        # assert gram in stop.words, """{0} is not in the corpus! Consider
-        # #                                 increasing the amount of data or adding
-        # #                             {0} to stop_words.txt')""".format(gram)
-        if len(gram.split(' ')) == 1:
             try:
                 vectors_dict = dict(vectors.similar_by_word(gram, topn=vector_scope))
                 vectors_list = list(vectors_dict)
@@ -228,9 +226,9 @@ def calculate_query(grams=grams,
             except KeyError:
                 pass
 
-        for sentence in read_article.sent_tokenize_plus:
-            if gram in sentence:
-                query_score[gram] += 1
+    for sentence in read_article.sent_tokenize_plus:
+        if gram in sentence:
+            query_score[gram] += 1
 
     if weight_mod > 0:
         for gram in grams:
@@ -301,8 +299,129 @@ def train_vectors(train_article_name,
 
     return w2v.wv
 
+class ModelMetrics:
+    def __init__(self, test_df=test_df, cd_data=cd_data):
+        """
+        calculates the confusion_matrix from 'type' and 'predict' columns in a test
+        pandas DataFrame.
+        """
+
+        TN = len(test_df[(test_df['type'] == False)
+                            &
+                            (test_df['predict'] == False)])
+
+        FP = len(test_df[(test_df['type'] == False)
+                            &
+                            (test_df['predict'] == True)])
+
+        FN = len(test_df[(test_df['type'] == True)
+                            &
+                            (test_df['predict'] == False)])
+
+        TP = len(test_df[(test_df['type'] == True)
+                            &
+                            (test_df['predict'] == True)])
+
+        matrix_dict = {'TN': TN,
+                        'FP': FP,
+                        'FN': FN,
+                        'TP': TP}
+
+        self.matrix = matrix_dict
+        try:
+            self.accuracy = ( TP + TN ) / ( TP + TN + FP + FN )
+        except ZeroDivisionError:
+            self.accuracy = 0
+        try:
+            self.recall = ( TP ) / ( TP + FN )
+        except ZeroDivisionError:
+            self.recall = 0
+        try:
+            self.precision = ( TP ) / ( TP + FP )
+        except ZeroDivisionError:
+            self.precision = 0
+        try:
+            self.false_positive_rate = ( FP ) / ( TN + FP )
+        except ZeroDivisionError:
+            self.false_positive_rate = 0
+
+def evaluate_model(read_article=read_article,
+                    train_article=train_article,
+                    train_article_name=train_article_name,
+                    test_df=test_df,
+                    test_name=test_name,
+                    parameters=parameters,
+                    cd_data=cd_data):
+    """
+    Tests the ChatBotModel using the specified parameters.
+
+    read_article -> ProcessArticle object that the bot is reading from.
+    train_article -> ProcessArticle object that the bot is taught from.
+    train_article_name -> Title of training article
+    test_df -> Pandas DataFrame with user_doc and type features.
+    test_name -> Name of the generated test file containing the output data.
+    cd_data -> Path to output directory.
+
+    Returns the test DataFrame. This is meant for the ModelMetrics class.
+    """
+    # change paramters in model to match dict.
+    for user_doc in tqdm(test_df['user_doc']):
+        user_article = ProcessArticle(user_doc)
+        test_model = ChatBotModel(user_article=user_article,
+                            read_article=read_article,
+                            train_article=train_article,
+                            train_article_name=train_article_name,
+                            gate=parameters['gate'],
+                            weight_mod=parameters['weight_mod'],
+                            window=parameters['window'],
+                            epochs=parameters['epochs'],
+                            vector_weight=parameters['vector_weight'],
+                            vector_scope=parameters['vector_scope'])
+        idx = test_df[test_df['user_doc'] == user_doc].index[0]
+        test_df.loc[idx, 'predict'] = test_model.prediction[0]
+        test_df.loc[idx, 'score'] = test_model.prediction[1]
+
+        test_df.to_csv(cd_data+test_name+'.csv')
+
+        # Write model metrics, params, and performance to file.
+        metrics = ModelMetrics(test_df=test_df)
+
+        # initializing DataFrame.
+        metrics_dict = {}
+        for key in parameters.keys():
+            metrics_dict[key] = []
+
+        for key in metrics.matrix.keys():
+            metrics_dict[key] = []
+
+        metrics_columns = ['accuracy',
+                            'precision',
+                            'recall',
+                            'false_positive_rate']
+
+        for column in metrics_columns:
+            metrics_dict[column] = []
+
+        metrics_dict['gate'].append(test_model.gate)
+        metrics_dict['weight_mod'].append(test_model.weight_mod)
+        metrics_dict['window'].append(test_model.window)
+        metrics_dict['epochs'].append(test_model.epochs)
+        metrics_dict['vector_scope'].append(test_model.vector_scope)
+        metrics_dict['vector_weight'].append(test_model.vector_weight)
+        metrics_dict['TN'].append(metrics.matrix['TN'])
+        metrics_dict['FP'].append(metrics.matrix['FP'])
+        metrics_dict['FN'].append(metrics.matrix['FN'])
+        metrics_dict['TP'].append(metrics.matrix['TP'])
+        metrics_dict['accuracy'].append(metrics.accuracy)
+        metrics_dict['precision'].append(metrics.precision)
+        metrics_dict['recall'].append(metrics.recall)
+        metrics_dict['false_positive_rate'].append(metrics.false_positive_rate)
 
 
+    metrics_df = pd.DataFrame(metrics_dict)
+    metrics_df.to_csv(cd_data+test_name+'(ModelMetrics).csv', index=False)
+
+    return test_df
 
 class ProcessArticle:
     def __init__(self, doc):
@@ -351,6 +470,7 @@ class ChatBotModel:
             train_article=train_article,
             train_article_name=train_article_name,
             cd_data=cd_data,
+            test_df=test_df,
             gate=gate,
             weight_mod=weight_mod,
             window=window,
@@ -363,6 +483,11 @@ class ChatBotModel:
         false positives and a high gate will cause more false negatives.
         """
         self.gate = gate
+        self.weight_mod = weight_mod
+        self.window = window
+        self.epochs = epochs
+        self.vector_scope = vector_scope
+        self.vector_weight = vector_weight
         self.user_article = user_article
         self.read_article = read_article
         self.grams = generate_grams(self.user_article)
@@ -383,9 +508,9 @@ class ChatBotModel:
 
         self.relevance_score = calculate_relevance(self.query_score)
         self.prediction = predict_doc(self.relevance_score, self.gate)
-        self.parameters = {'gate': gate,
-                            'weight_mod': weight_mod,
-                            'window': window,
-                            'epochs': epochs,
-                            'vector_scope': vector_scope,
-                            'vector_weight': vector_weight}
+        self.parameters = {'gate': self.gate,
+                            'weight_mod': self.weight_mod,
+                            'window': self.window,
+                            'epochs': self.epochs,
+                            'vector_scope': self.vector_scope,
+                            'vector_weight': self.vector_weight}

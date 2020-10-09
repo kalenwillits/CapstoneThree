@@ -26,12 +26,9 @@ from library import *
 
 cd_data = 'data/'
 cd_figures = 'figures/'
-
+cd_docs = 'docs/'
 # %% markdown
-# ## Data Gathering And Transforming
-
-# %% markdown
-# ## Data Gathering And Transforming
+# ### Data Gathering And Transforming
 # %% codecell
 # __Wrangle Data__
 # load_wiki_article(cd_data=cd_data) # Comment out after article has been loaded once.
@@ -101,7 +98,20 @@ plt.xticks(rotation=90)
 # statement is true or false.
 
 # %% codecell
-# __Prototyping__
+# __Model Creation & Testing__
+# Import test data
+test_df = pd.read_csv(cd_data+'test_data.csv')
+test_df['predict'] = pd.NA
+test_df['score'] = pd.NA
+
+# Test data limit ( Smaller size of test data means a faster test )
+test_df.head(2)
+
+# Name associated reports and data files from the model's evaluation.
+test_name = 'model_metrics'
+
+
+
 #Gather user input
 user_doc = 'The Queen can move in any direction'
 # Process user input
@@ -113,7 +123,7 @@ model = ChatBotModel(user_article=user_article,
                     read_article=chess,
                     train_article=chess,
                     train_article_name='train_sample.txt',
-                    gate=30,
+                    gate=20,
                     weight_mod=1.5,
                     window=50,
                     epochs=15,
@@ -122,17 +132,83 @@ model = ChatBotModel(user_article=user_article,
 
 # Generate a prediction
 user_article.tolest
-print(model.prediction, model.query_score)
+model.prediction, model.query_score
 
 # %% markdown
 # ### Testing Data
 #  Training and validation data have been gathered using the scripts
 # "gather_articles.py" and "generate_validation_data.py." The data sets.
+#
 # data/train_data.txt -> A large document containing ~1000 appended wiki
 # articles
+#
 # data/train_sample.txt -> A modified wiki article for fast testing.
+#
 # data/validation.csv -> A dataset containing sentences from the rules of chess
 # and another random wiki article for performance measurement and model tuning.
 
 # %% codecell
-validation_df = pd.read_csv(cd_data+'validation_data.csv')
+
+
+
+
+# Genereate test data and write it to csv format.
+test_df = evaluate_model(read_article=chess,
+        train_article=chess,
+        train_article_name='train_sample.txt',
+        test_df=test_df,
+        parameters=model.parameters,
+        test_name=test_name)
+
+# Generate metrics from the test data.
+metrics = ModelMetrics(test_df=test_df)
+
+
+# Format generated report
+model_performance_report = [
+'# MODEL PERFORMACE REPORT',
+'\n',
+'### TEST NAME',
+'\n',
+ '>'+test_name,
+'\n',
+'### MODEL PREDICTION',
+'\n',
+'>'+str(model.prediction),
+'\n',
+'### NGRAMS & QUERY SCORES'
+'\n',
+'>'+str(model.query_score),
+'\n',
+'### MODEL PARAMETERS',
+'\n',
+'>'+str(model.parameters),
+'\n',
+'### CONFUSION MATRIX',
+'\n',
+'>'+str(metrics.matrix),
+'\n',
+'### Accuracy'
+'\n',
+'>'+str(metrics.accuracy),
+'\n',
+'### PRECISION',
+'\n',
+'>'+str(metrics.precision),
+'\n',
+'### RECALL'
+'\n',
+'>'+str(metrics.recall),
+'\n',
+'### FALSE POSTIVE RATE'
+'\n',
+'>'+str(metrics.false_positive_rate)]
+
+# Save generated report to file.
+with open(cd_docs+test_name+'.md', 'w+') as report:
+    for line in model_performance_report:
+        report.write(line)
+
+metrics_df = pd.read_csv(cd_data+test_name+'(ModelMetrics).csv')
+
+metrics_df

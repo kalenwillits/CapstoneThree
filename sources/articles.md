@@ -21,3 +21,5 @@
 [Top 1000 Wikipedia Articles](https://en.wikipedia.org/wiki/User:HostBot/Top_1000_report)
 
 [Webster's Unabridged Dictionary by Various](http://www.gutenberg.org/ebooks/29765)
+
+[Confusion matrix, accuracy, recall, precision, false positive rate and F-scores explained](https://nillsf.com/index.php/2020/05/23/confusion-matrix-accuracy-recall-precision-false-positive-rate-and-f-scores-explained/)

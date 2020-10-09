@@ -51,5 +51,9 @@ TODO:
 <!-- Use the word2vec vectors in the calculation to find synonyms.
 - Use the code in Gensim.py to do this. -->
 Update prototype ( for presentation )
-Create a validation data set for metrics.
-- Use this data to create a confusion matrix for measuring model performance.
+<!-- Create a validation data set for metrics. -->
+<!-- - Use this data to create a confusion matrix for measuring model performance. -->
+<!-- - generate model output for later recall -->
+Update Doc strings
+Generate report on model metrics and parameters.
+Use random search to search for optimal model performance 

@@ -1,4 +1,4 @@
-# generate_validation_data.py
+# generate_test_data.py
 # Here we will read in and cannibalize the Rules of Chess wiki document and use
 # that article as our baseline truth. Then we will add a random article from
 # Wikipedia and use that as the false values.
@@ -24,4 +24,4 @@ false_df['type'] = False
 df = true_df.merge(false_df, on=['user_doc', 'type'], how='outer')
 
 # Send to file for testing.
-df.to_csv(cd_data+'validation_data.csv', index=False)
+df.to_csv(cd_data+'test_data.csv', index=False)
