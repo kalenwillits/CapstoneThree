@@ -1,0 +1,5 @@
+user_doc,type,predict,score
+"in 1836 pierre charles fournier de saint-amant suggested a time limit, but no action was taken.",True,False,1.4547516335816706
+this is since most tournaments now include either an increment (extra time being added prior or after the move) or delay (a countdown to when a clock starts again) to their time controls.,True,False,4.149450274116521
+"==== resigning ====
+either player may resign at any time, conceding the game to their opponent.",True,False,8.386600331379013

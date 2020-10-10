@@ -12,6 +12,7 @@
 #   - [Observation](Observation)
 # - [Feature Engineering](#Feature-Engineering)
 # - [Testing Data](#Testing-Data)
+# = [Model Performance Analysis](#Model-Performance-Analysis)
 
 # %% codecell
 # __Environment__
@@ -21,12 +22,15 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from wordcloud import WordCloud, ImageColorGenerator
 from PIL import Image
+from gensim.test.utils import get_tmpfile
+from gensim.models import KeyedVectors
+import os
 from library import *
-# from models import *
 
 cd_data = 'data/'
 cd_figures = 'figures/'
 cd_docs = 'docs/'
+cd_models = 'models/'
 # %% markdown
 # ### Data Gathering And Transforming
 # %% codecell
@@ -104,35 +108,16 @@ test_df = pd.read_csv(cd_data+'test_data.csv')
 test_df['predict'] = pd.NA
 test_df['score'] = pd.NA
 
-# Test data limit ( Smaller size of test data means a faster test )
-test_df.head(2)
+# Test parameters. Limits the number of test runs.
+test_limit = len(test_df) # for full use of the dataset use len(test_df)
+number_of_tests = 50 # Number of times random paramters are generated
+
+test_df = test_df.sample(frac=1).head(test_limit)
 
 # Name associated reports and data files from the model's evaluation.
-test_name = 'model_metrics'
+test_name = 'param_test_x50'
 
 
-
-#Gather user input
-user_doc = 'The Queen can move in any direction'
-# Process user input
-user_article = ProcessArticle(user_doc)
-# train_article = ProcessArticle(read_doc)
-# Instantiate model
-
-model = ChatBotModel(user_article=user_article,
-                    read_article=chess,
-                    train_article=chess,
-                    train_article_name='train_sample.txt',
-                    gate=20,
-                    weight_mod=1.5,
-                    window=50,
-                    epochs=15,
-                    vector_weight=10,
-                    vector_scope=5)
-
-# Generate a prediction
-user_article.tolest
-model.prediction, model.query_score
 
 # %% markdown
 # ### Testing Data
@@ -148,67 +133,109 @@ model.prediction, model.query_score
 # and another random wiki article for performance measurement and model tuning.
 
 # %% codecell
+# generate random parameters for random search parameter tuning.
+
+with open(cd_data+'train_sample.txt') as file:
+    train_sample_doc = file.read()
+
+train_sample_article = ProcessArticle(train_sample_doc)
+
+metrics_columns = ['gate', 'weight_mod', 'window', 'epochs', 'vector_scope',
+   'vector_weight', 'TN', 'FP', 'FN', 'TP', 'accuracy', 'precision',
+   'recall', 'false_positive_rate']
+
+metrics_dict = {}
+for column in metrics_columns:
+    metrics_dict[column] = []
+
+#Generate clean test file.
+pd.DataFrame(metrics_dict).to_csv(cd_data+test_name+'(ModelMetrics).csv',
+                                    index=False)
 
 
 
-
-# Genereate test data and write it to csv format.
-test_df = evaluate_model(read_article=chess,
-        train_article=chess,
-        train_article_name='train_sample.txt',
-        test_df=test_df,
-        parameters=model.parameters,
-        test_name=test_name)
-
-# Generate metrics from the test data.
-metrics = ModelMetrics(test_df=test_df)
+for test in tqdm(range(number_of_tests)):
 
 
-# Format generated report
-model_performance_report = [
-'# MODEL PERFORMACE REPORT',
-'\n',
-'### TEST NAME',
-'\n',
- '>'+test_name,
-'\n',
-'### MODEL PREDICTION',
-'\n',
-'>'+str(model.prediction),
-'\n',
-'### NGRAMS & QUERY SCORES'
-'\n',
-'>'+str(model.query_score),
-'\n',
-'### MODEL PARAMETERS',
-'\n',
-'>'+str(model.parameters),
-'\n',
-'### CONFUSION MATRIX',
-'\n',
-'>'+str(metrics.matrix),
-'\n',
-'### Accuracy'
-'\n',
-'>'+str(metrics.accuracy),
-'\n',
-'### PRECISION',
-'\n',
-'>'+str(metrics.precision),
-'\n',
-'### RECALL'
-'\n',
-'>'+str(metrics.recall),
-'\n',
-'### FALSE POSTIVE RATE'
-'\n',
-'>'+str(metrics.false_positive_rate)]
+    parameters = {'gate': np.random.randint(3, 100),
+     'weight_mod': np.random.randint(1, 5)*np.random.random(),
+     'window': np.random.randint(1, 15),
+     'epochs': np.random.randint(1, 25),
+     'vector_scope': np.random.randint(1,25),
+     'vector_weight': np.random.randint(1, 20)*np.random.random()}
 
-# Save generated report to file.
-with open(cd_docs+test_name+'.md', 'w+') as report:
-    for line in model_performance_report:
-        report.write(line)
+    # Genereate test data and write it to csv format.
 
-metrics_df = pd.read_csv(cd_data+test_name+'(ModelMetrics).csv')
+    test_model, test_df = evaluate_model(read_article=chess,
+            train_article=train_sample_article,
+            train_article_name='train_sample.txt',
+            test_df=test_df,
+            parameters=parameters,
+            test_name=test_name)
 
-metrics_df
+    metrics = ModelMetrics(test_df=test_df)
+    metrics_dict['gate'].append(test_model.gate)
+    metrics_dict['weight_mod'].append(test_model.weight_mod)
+    metrics_dict['window'].append(test_model.window)
+    metrics_dict['epochs'].append(test_model.epochs)
+    metrics_dict['vector_scope'].append(test_model.vector_scope)
+    metrics_dict['vector_weight'].append(test_model.vector_weight)
+    metrics_dict['TN'].append(metrics.matrix['TN'])
+    metrics_dict['FP'].append(metrics.matrix['FP'])
+    metrics_dict['FN'].append(metrics.matrix['FN'])
+    metrics_dict['TP'].append(metrics.matrix['TP'])
+    metrics_dict['accuracy'].append(metrics.accuracy)
+    metrics_dict['precision'].append(metrics.precision)
+    metrics_dict['recall'].append(metrics.recall)
+    metrics_dict['false_positive_rate'].append(metrics.false_positive_rate)
+
+        # test_df.to_csv(cd_data+test_name+'.csv', index=False)
+
+
+
+        # initializing DataFrame.
+
+    metrics_df = pd.DataFrame(metrics_dict)
+    metrics_df.to_csv(cd_data+test_name+'(ModelMetrics).csv',
+                                            index=False,
+                                            mode='a',
+                                            header=False)
+
+# Saving model vectors
+# metrics_df = pd.read_csv(cd_data+test_name+'(ModelMetrics).csv')
+test_df
+help(metrics_df.groupby)
+test_group = metrics_df.groupby('accuracy').max().reset_index()
+test_group.sort_values('accuracy', ascending=False).iloc[2]
+# %% markdown
+# ### Model Performance Analysis
+# Ignoring that this model is likely over-fit at this point. We need to decide
+# what parameters we are willing to use. To do this, let's first decide how many
+# false positives we can allow. A false positve would mean the chat bot would
+# tell the user a statment is true when in fact it is false. This is very bad
+# and could cause extreme user frustration towards the product once put into
+# production. However we must also balance false negatives for the inverse
+# reason.
+#
+# In an attempt to avoid further over-fitting, and because we can expect the
+# Word2Vec model to carry more weight when fully trained in on the Google VM,
+# I will continue with the following parameters.
+
+# >accuracy                 0.955056
+# >gate                     7.000000
+# >weight_mod               0.855440
+# >window                  13.000000
+# >epochs                   9.000000
+# >vector_scope            17.000000
+# >vector_weight           14.888270
+# >TN                      75.000000
+# >FP                       1.000000
+# >FN                      15.000000
+# >TP                     265.000000
+# >precision                0.996241
+# >recall                   0.946429
+# >false_positive_rate      0.013158
+
+# %% codecell
+# Train and save
+# model.vectors.save(os.path.join('models', 'vectors.w2v'))

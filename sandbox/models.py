@@ -59,3 +59,29 @@ class Model:
             weight_mod=weight_mod)
             self.relevance_score = calculate_relevance(self.query_score)
             self.prediction = predict_doc(self.relevance_score, self.gate)
+
+
+
+            # #Gather user input
+            # user_doc = 'The Queen can move in any direction'
+            # # Process user input
+            # user_article = ProcessArticle(user_doc)
+            # # train_article = ProcessArticle(read_doc)
+            # # Instantiate model
+            #
+            # model = ChatBotModel(user_article=user_article,
+            #                     read_article=chess,
+            #                     train_article=chess,
+            #                     train_article_name='train_sample.txt',
+            #                     gate=20,
+            #                     weight_mod=1.5,
+            #                     window=50,
+            #                     epochs=15,
+            #                     vector_weight=10,
+            #                     vector_scope=5)
+
+            # Save trained vectors as KeyedVectors.
+
+            # Generate a prediction
+            # user_article.tolest
+            # model.prediction, model.query_score

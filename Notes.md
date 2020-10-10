@@ -55,5 +55,7 @@ Update prototype ( for presentation )
 <!-- - Use this data to create a confusion matrix for measuring model performance. -->
 <!-- - generate model output for later recall -->
 Update Doc strings
-Generate report on model metrics and parameters.
-Use random search to search for optimal model performance 
+<!-- Generate report on model metrics and parameters. -->
+<!-- Use random search to search for optimal model performance  -->
+Save trained Word2vec model for later import
+Initialize csv for model metrics.

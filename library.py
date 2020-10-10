@@ -9,26 +9,30 @@ import pandas as pd
 from tqdm import tqdm
 from collections import Counter
 from gensim.models import Word2Vec
+from gensim.test.utils import get_tmpfile
+from gensim.test.utils import datapath
+
 
 # __Default Parameters__
 cd_data = 'data/'
 cd_figures = 'figures/'
-vector_scope = 10
-weight_mod = 3
-vector_weight = 1
-epochs = 1
-window = 1
-gate = 40
-weight_mod = 3
-grams = None
-read_article = None
+cd_models = 'models/'
+vector_scope = 17.000000
+weight_mod = 0.855440
+vector_weight = 14.888270
+epochs = 9.000000
+window = 13.000000
+gate = 7
+grams = 1
+read_article = None # ProcessArticle object
 read_article_name = 'rules of chess'
-user_article = None
-train_article = None
-train_article_name = 'train_sample'
+user_article = None # ProcessArticle object
+train_article = None # ProcessArticle object
+train_article_name = 'dummy_train.txt'
 vectors = 1
 test_df = {'user_article':[0],'type':[0],'predict':[0],'score':[0]}
 test_name = 'model_metrics'
+load_vectors = None
 parameters = {}
 
 
@@ -135,32 +139,10 @@ def one_hot(doc):
     df_1h = pd.get_dummies(doc_stop)
     return df_1h
 
-def batch_data(data, num_batches=10):
-    """
-    Splits an array into batches of a specified size.
-    """
-    batch_size = round(len(data)/num_batches)
-    batches = []
-    size = len(data)
-    steps = np.arange(0, size, batch_size).tolist()
-    idx = 0
-
-    while idx < len(steps):
-        if steps[idx] == steps[-1]:
-            break
-        batch_df = data[steps[idx]:steps[idx+1]]
-        batches.append(batch_df)
-        idx += 1
-
-    print('Batch Size: ', batch_size,
-    '\nBatches: ', num_batches,
-    '\nOriginal: ', size)
-    return batches
-
 def count_token_frequency(article, data):
     """
-    Counts the frequency of words that appear in each senctence.
-    - designed for (chess, token_counts_df)
+    Counts the frequency of words that appear in each sentence.
+    - Designed for (chess, token_counts_df)
     - Returns as a Pandas DataFrame.
     """
     token_sent_freq = {}
@@ -291,11 +273,10 @@ def train_vectors(train_article_name,
 
     """
 
-    with open(cd_data+train_article_name, 'r+') as file:
-        train_data = file.read()
-
     w2v = Word2Vec(test_data, window=window)
     w2v.train(train_data, total_words=len(corpus), epochs=epochs)
+    SaveLoad.save(w2v, cd_models+'vectors.wv')
+
 
     return w2v.wv
 
@@ -353,19 +334,25 @@ def evaluate_model(read_article=read_article,
                     parameters=parameters,
                     cd_data=cd_data):
     """
-    Tests the ChatBotModel using the specified parameters.
+    Tests the ChatBotModel using the specified parameters. Parameters and
+    model performance is written to the .csv file named
+    test_name+(ModelMetrics).csv. This csv can be evaluated to to find optimal
+    parameters.
 
     read_article -> ProcessArticle object that the bot is reading from.
     train_article -> ProcessArticle object that the bot is taught from.
     train_article_name -> Title of training article
     test_df -> Pandas DataFrame with user_doc and type features.
     test_name -> Name of the generated test file containing the output data.
+    parameters -> Dictionary matching the ChatBotModel parameters.
     cd_data -> Path to output directory.
 
-    Returns the test DataFrame. This is meant for the ModelMetrics class.
+
+
+    Returns the test DataFrame.
     """
-    # change paramters in model to match dict.
-    for user_doc in tqdm(test_df['user_doc']):
+
+    for user_doc in test_df['user_doc']:
         user_article = ProcessArticle(user_doc)
         test_model = ChatBotModel(user_article=user_article,
                             read_article=read_article,
@@ -381,47 +368,7 @@ def evaluate_model(read_article=read_article,
         test_df.loc[idx, 'predict'] = test_model.prediction[0]
         test_df.loc[idx, 'score'] = test_model.prediction[1]
 
-        test_df.to_csv(cd_data+test_name+'.csv')
-
-        # Write model metrics, params, and performance to file.
-        metrics = ModelMetrics(test_df=test_df)
-
-        # initializing DataFrame.
-        metrics_dict = {}
-        for key in parameters.keys():
-            metrics_dict[key] = []
-
-        for key in metrics.matrix.keys():
-            metrics_dict[key] = []
-
-        metrics_columns = ['accuracy',
-                            'precision',
-                            'recall',
-                            'false_positive_rate']
-
-        for column in metrics_columns:
-            metrics_dict[column] = []
-
-        metrics_dict['gate'].append(test_model.gate)
-        metrics_dict['weight_mod'].append(test_model.weight_mod)
-        metrics_dict['window'].append(test_model.window)
-        metrics_dict['epochs'].append(test_model.epochs)
-        metrics_dict['vector_scope'].append(test_model.vector_scope)
-        metrics_dict['vector_weight'].append(test_model.vector_weight)
-        metrics_dict['TN'].append(metrics.matrix['TN'])
-        metrics_dict['FP'].append(metrics.matrix['FP'])
-        metrics_dict['FN'].append(metrics.matrix['FN'])
-        metrics_dict['TP'].append(metrics.matrix['TP'])
-        metrics_dict['accuracy'].append(metrics.accuracy)
-        metrics_dict['precision'].append(metrics.precision)
-        metrics_dict['recall'].append(metrics.recall)
-        metrics_dict['false_positive_rate'].append(metrics.false_positive_rate)
-
-
-    metrics_df = pd.DataFrame(metrics_dict)
-    metrics_df.to_csv(cd_data+test_name+'(ModelMetrics).csv', index=False)
-
-    return test_df
+    return test_model, test_df
 
 class ProcessArticle:
     def __init__(self, doc):
@@ -469,6 +416,7 @@ class ChatBotModel:
             read_article=read_article,
             train_article=train_article,
             train_article_name=train_article_name,
+            load_vectors=load_vectors,
             cd_data=cd_data,
             test_df=test_df,
             gate=gate,
@@ -479,8 +427,21 @@ class ChatBotModel:
             vector_weight=vector_weight):
         """
         Model of the user article when compared to the read article.
+        Utilized an ngrams loop and Gensim's Word2Vec to compare word meaning.
+
+        user_article -> ProcessArticle object from the user_doc.
+        read_article -> ProcessArticle object from which the model is reading
+        from.
+        train_article -> ProcessArticle object from which the model is trained
+        on.
+        train_article_name -> Title of the article that the model will train on.
+        This variable is used for downloading the artilce from Wikipedia and
+        saving the article to a file.
+        cd_data ->
         gate -> The threshold of proper relevance. A low gate will cause more
         false positives and a high gate will cause more false negatives.
+
+
         """
         self.gate = gate
         self.weight_mod = weight_mod
@@ -491,13 +452,16 @@ class ChatBotModel:
         self.user_article = user_article
         self.read_article = read_article
         self.grams = generate_grams(self.user_article)
-
-        self.vectors = train_vectors(train_article_name,
-                        self.read_article.full_tokenize,
-                        train_article.corpus,
-                        window=window,
-                        epochs=epochs,
-                        cd_data=cd_data)
+        if load_vectors == None:
+            self.vectors = train_vectors(train_article_name,
+                            self.read_article.full_tokenize,
+                            train_article.corpus,
+                            window=window,
+                            epochs=epochs,
+                            cd_data=cd_data)
+        else:
+            kv = cd_models+load_vectors
+            self.vectors = KeyedVectors.load(kv, mmap='r')
 
         self.query_score = calculate_query(grams=self.grams,
                             read_article=self.read_article,
