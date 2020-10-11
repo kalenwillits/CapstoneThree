@@ -57,5 +57,5 @@ Update prototype ( for presentation )
 Update Doc strings
 <!-- Generate report on model metrics and parameters. -->
 <!-- Use random search to search for optimal model performance  -->
-Save trained Word2vec model for later import
-Initialize csv for model metrics.
+<!-- Save trained Word2vec model for later import -->
+<!-- Initialize csv for model metrics. -->

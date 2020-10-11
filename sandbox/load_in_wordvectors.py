@@ -2,10 +2,10 @@
 from library import *
 
 SaveLoad.save(test_model.vectors, cd_models+'vectors.w2v')
-from gensim.utils import SaveLoad
 user_article = ProcessArticle('Unneeded input for training. Test check test amount object fox brown')
 read_article = user_article
 train_article = user_article
+
 help(SaveLoad.save)
 
 ChatBotModel(user_article=user_article, read_article=read_article, train_article=train_article)

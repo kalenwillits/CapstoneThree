@@ -5,7 +5,7 @@ large amount of data. Be sure your environment is prepared accordingly. Would yo
 continue? (Y/N) """)
 
 if warning.lower() == 'y':
-    
+
     # __Load Environment__
     import numpy as np
     import matplotlib.pyplot as plt
@@ -40,4 +40,4 @@ if warning.lower() == 'y':
     cd_data=cd_data)
 
     # __Save Word2Vec Vectors__
-    big_model.vectors.save(os.path.join('models', 'big_vectors.w2v'))
+    big_model.vectors.save(cd_models+'big_vectors.w2v'))

@@ -22,9 +22,6 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from wordcloud import WordCloud, ImageColorGenerator
 from PIL import Image
-from gensim.test.utils import get_tmpfile
-from gensim.models import KeyedVectors
-import os
 from library import *
 
 cd_data = 'data/'
@@ -37,12 +34,12 @@ cd_models = 'models/'
 # __Wrangle Data__
 # load_wiki_article(cd_data=cd_data) # Comment out after article has been loaded once.
 doc = read_wiki_article(cd_data=cd_data)
-chess = ProcessArticle(doc)
+rules_of_chess = ProcessArticle(doc)
 
 # __Transform__
-token_df = pd.DataFrame({'token':chess.tolest})
+token_df = pd.DataFrame({'token':rules_of_chess.tolest})
 token_counts_df = pd.DataFrame(token_df['token'].value_counts())
-token_1h_df = chess.one_hot
+token_1h_df = rules_of_chess.one_hot
 
 # __Write To File__
 token_df.to_csv(cd_data+'tokens.csv', index=False)
@@ -77,7 +74,7 @@ token_counts_df.describe()
 
 # %% codecell
 # __Token Frequency Within Sentences__
-token_freq_df = count_token_frequency(chess, token_counts_df)
+token_freq_df = count_token_frequency(rules_of_chess, token_counts_df)
 
 plot_title = 'frequency-of-words-in-sentence'
 plt.figure(figsize=(100,10))
@@ -129,7 +126,7 @@ test_name = 'param_test_x50'
 #
 # data/train_sample.txt -> A modified wiki article for fast testing.
 #
-# data/validation.csv -> A dataset containing sentences from the rules of chess
+# data/validation.csv -> A dataset containing sentences from the rules of rules_of_chess
 # and another random wiki article for performance measurement and model tuning.
 
 # %% codecell
@@ -166,7 +163,7 @@ for test in tqdm(range(number_of_tests)):
 
     # Genereate test data and write it to csv format.
 
-    test_model, test_df = evaluate_model(read_article=chess,
+    test_model, test_df = evaluate_model(read_article=rules_of_chess,
             train_article=train_sample_article,
             train_article_name='train_sample.txt',
             test_df=test_df,
@@ -237,5 +234,26 @@ test_group.sort_values('accuracy', ascending=False).iloc[2]
 # >false_positive_rate      0.013158
 
 # %% codecell
-# Train and save
-# model.vectors.save(os.path.join('models', 'vectors.w2v'))
+
+# Model training done in the "model_training.py" file.
+
+user_doc = 'Chess has two players, a king and queen, and a chessboard.'
+user_article = ProcessArticle(user_doc)
+
+with open(cd_data+'train_data.txt', 'r+') as file:
+    train_doc = file.read()
+train_article = ProcessArticle(train_doc)
+
+trained_model = ChatBotModel(user_article=user_article,
+read_article=rules_of_chess,
+train_article=train_article,
+train_article_name='train_data.txt',
+load_vectors='big_vectors.w2v',
+cd_data=cd_data,
+test_df=test_df,
+gate=7,
+weight_mod=0.855440,
+window=13,
+epochs=9,
+vector_scope=17,
+vector_weight=14.888270)

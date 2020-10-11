@@ -9,8 +9,8 @@ import pandas as pd
 from tqdm import tqdm
 from collections import Counter
 from gensim.models import Word2Vec
-from gensim.test.utils import get_tmpfile
-from gensim.test.utils import datapath
+from gensim.utils import SaveLoad
+
 
 
 # __Default Parameters__
