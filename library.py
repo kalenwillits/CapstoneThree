@@ -261,7 +261,8 @@ def train_vectors(train_article_name,
                 epochs=epochs,
                 cd_data=cd_data):
     """
-    Train doc needs to be saved to a file.
+    Trains the Word2Vec model using the test_data, then saves the vectors in the
+    models directory.
 
     train_article_name -> String of file name excluding the path.
     test_data -> Fully tokenized read_article
@@ -433,17 +434,39 @@ class ChatBotModel:
         Utilized an ngrams loop and Gensim's Word2Vec to compare word meaning.
 
         user_article -> ProcessArticle object from the user_doc.
+
         read_article -> ProcessArticle object from which the model is reading
         from.
+
         train_article -> ProcessArticle object from which the model is trained
         on.
+
         train_article_name -> Title of the article that the model will train on.
         This variable is used for downloading the artilce from Wikipedia and
         saving the article to a file.
-        cd_data ->
+
+        cd_data -> Path to the data directory as a string.
+
         gate -> The threshold of proper relevance. A low gate will cause more
         false positives and a high gate will cause more false negatives.
 
+        weight_mod -> A float number that is used as an exponent in the ngrams
+        loop where n**weight_mod = relevance_score.
+
+        window -> Parameter passed down to the Word2Vec model selecting the
+        range of neighbors calculated around the selected number.
+
+        epochs -> Parameter passed down to the Word2Vec.train() method. This
+        determines the number of times the documents will be looped over in the
+        training process.
+
+        vector_scope -> Chooses the number of words to count in the query_score
+        produced from the Word2Vec.wv.similar_by_word method. This parameter is
+        aliased from topn.
+
+        vector_weight -> The float number that the counter of vectors is
+        multiplied by to determine what the vector weight is worth in the
+        classification.
 
         """
         self.gate = gate

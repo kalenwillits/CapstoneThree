@@ -12,7 +12,9 @@
 #   - [Observation](Observation)
 # - [Feature Engineering](#Feature-Engineering)
 # - [Testing Data](#Testing-Data)
-# = [Model Performance Analysis](#Model-Performance-Analysis)
+# - [Model Performance Analysis](#Model-Performance-Analysis)
+# - [Conclusion](#Conclusion)
+
 
 # %% codecell
 # __Environment__
@@ -210,8 +212,8 @@ test_group = metrics_df.groupby('accuracy').max().reset_index()
 # ### Model Performance Analysis
 # Ignoring that this model is likely over-fit at this point. We need to decide
 # what parameters we are willing to use. To do this, let's first decide how many
-# false positives we can allow. A false positve would mean the chat bot would
-# tell the user a statment is true when in fact it is false. This is very bad
+# false positives we can allow. A false positive would mean the chat bot would
+# tell the user a statement is true when in fact it is false. This is very bad
 # and could cause extreme user frustration towards the product once put into
 # production. However we must also balance false negatives for the inverse
 # reason.
@@ -219,6 +221,15 @@ test_group = metrics_df.groupby('accuracy').max().reset_index()
 # In an attempt to avoid further over-fitting, and because we can expect the
 # Word2Vec model to carry more weight when fully trained in on the Google VM,
 # I will continue with the following parameters.
+# ----------------------
+# **After further investigation that the model was over fit due to a lack of
+# specific classified data. I have since added specific inputs and classified
+# them by hand to the test data. The issue with this is that it means the model
+# will not be able to read in general data and will always require specific
+# training to become usable. Because of this, I have opted to use Google's
+# pre-trained Word2Vec model for the vectors in this algorithm. These vectors
+# will provide general understanding for the model with better results, but will
+# still require specfic data to learn and test on in the form of user_docs.  **
 
 # >accuracy                 0.955056
 #
@@ -277,3 +288,21 @@ vector_weight=14.888270)
 # %% codecell
 # __Simulation__
 print(user_doc, '->', trained_model.prediction)
+
+
+# %% markdown
+#  ### Conclusion
+# It's clear that a statistical model is not able to just read in an article.
+# Other training steps are required. The chat bot that will be generated using
+# these methods will have very little expertise on the subject until more data
+# is added manually. This will require many inputs that are previously
+# classified as true or false to be added to the bot's database. Since the
+# model is currently acting more like a search engine, we can make use of this
+# feature by making the searchable data vast and high quality. The trade off to
+# this would be high amounts of training, tedious labeling, and excellent
+# vectors. So for our initial purpose of implementing an all-in-one chat bot
+# for support centers, legal documents, and labels, this project has shown that
+# there is not an all-in-one solution. However, if the bot was trained and
+# maintained to continuously become better, we could have what we are looking
+# for. The bottom line is that this is not practical for the average users and
+# could only be sold as a B2B service.
