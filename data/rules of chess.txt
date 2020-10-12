@@ -113,7 +113,7 @@ A game played under time control will end as a loss for a player who uses up all
 
 
 == Competition rules ==
-The following rules are the rules used for "over the board" (OTB) games. They are defined by the FIDE Laws of Chess.. The FIDE Laws of Chess define the rules for Standard chess, Rapid chess, Blitz chess and guidelines for Chess960. Some rules are specifically adapted for disabled players. As the rules cover OTB play, they cannot be directly applied to computer chess or online chess, played on a computer device. The rules for correspondence chess are defined by the ICCF.
+The following rules are the rules used for "over the board" (OTB) games. They are defined by the FIDE Laws of Chess. The FIDE Laws of Chess define the rules for Standard chess, Rapid chess, Blitz chess and guidelines for Chess960. Some rules are specifically adapted for disabled players. As the rules cover OTB play, they cannot be directly applied to computer chess or online chess, played on a computer device. The rules for correspondence chess are defined by the ICCF.
 
 
 === Moving the pieces ===

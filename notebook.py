@@ -204,7 +204,7 @@ for test in tqdm(range(number_of_tests)):
                                             header=False)
 
 # Saving model params
-test_df
+
 test_group = metrics_df.groupby('accuracy').max().reset_index()
 best_params = test_group[['gate', 'weight_mod', 'window', 'epochs', 'vector_scope', 'vector_weight']]
 best_params.to_csv(cd_models+'parameters.csv', index=False)

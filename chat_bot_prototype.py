@@ -3,7 +3,13 @@ from time import sleep
 from library import *
 from models import *
 from subprocess import call
+import pandas as pd
+from gensim.models import KeyedVectors
 pause_time = 0.5
+cd_models = 'models/'
+parameters_df = pd.read_csv(cd_models+'parameters.csv')
+parameters = parameters_df.transpose().to_dict()[0]
+google_vectors = KeyedVectors.load_word2vec_format(cd_models+'GoogleNews-vectors-negative300.bin', binary=True)
 
 call('clear')
 print('-> Hello!')
@@ -18,7 +24,7 @@ print('\n-> Please allow me a moment to train on', topic+'.')
 load_wiki_article(article_name=topic, cd_data=cd_data)
 read_doc = read_wiki_article(article_name=topic, cd_data=cd_data)
 read_article = ProcessArticle(read_doc)
-print('-> Okay I\'ve got it, what would you like to know?')
+print('-> Okay I\'ve got it, ask me a question!')
 sleep(pause_time)
 
 # Start loop
@@ -27,12 +33,24 @@ while loop:
     user_doc = input('\n<- ').lower()
     if user_doc == 'bye':
         sleep(pause_time)
-        print('-> Goodbye!')
+        print('\n-> Goodbye!')
         sleep(pause_time)
         call('clear')
         loop = False
     else:
         user_article = ProcessArticle(user_doc)
-        model = Model(user_article, read_article)
+        model = ChatBotModel(user_article=user_article,
+        read_article=read_article,
+        train_article=None,
+        train_article_name='train_data_sample.txt',
+        load_vectors=google_vectors,
+        cd_data=cd_data,
+        test_df=test_df,
+        gate=parameters['gate'],
+        weight_mod=parameters['weight_mod'],
+        window=parameters['window'],
+        epochs=parameters['epochs'],
+        vector_scope=int(parameters['vector_scope']),
+        vector_weight=parameters['vector_weight'])
         sleep(pause_time)
         print('\n-> That is', str(model.prediction[0]).lower()+'.')
