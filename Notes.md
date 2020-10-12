@@ -59,3 +59,5 @@ Update Doc strings
 <!-- Use random search to search for optimal model performance  -->
 <!-- Save trained Word2vec model for later import -->
 <!-- Initialize csv for model metrics. -->
+Add data to the test set. 
+<!-- Change the load_vectors param to pass a Word2Vec Model. ( So it does not have to train or load every time.) -->

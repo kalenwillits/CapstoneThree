@@ -8,7 +8,7 @@ import numpy as np
 import pandas as pd
 from tqdm import tqdm
 from collections import Counter
-from gensim.models import Word2Vec
+from gensim.models import Word2Vec, KeyedVectors
 from gensim.utils import SaveLoad
 
 
@@ -29,6 +29,7 @@ read_article_name = 'rules of chess'
 user_article = None # ProcessArticle object
 train_article = None # ProcessArticle object
 train_article_name = 'dummy_train.txt'
+train_data = 'train_sample.txt'
 vectors = 1
 test_df = {'user_article':[0],'type':[0],'predict':[0],'score':[0]}
 test_name = 'model_metrics'
@@ -275,7 +276,7 @@ def train_vectors(train_article_name,
 
     w2v = Word2Vec(test_data, window=window)
     w2v.train(train_data, total_words=len(corpus), epochs=epochs)
-    SaveLoad.save(w2v, cd_models+'vectors.wv')
+    SaveLoad.save(w2v, cd_models+'vectors.w2v')
 
 
     return w2v.wv
@@ -330,6 +331,7 @@ def evaluate_model(read_article=read_article,
                     train_article=train_article,
                     train_article_name=train_article_name,
                     test_df=test_df,
+                    load_vectors=load_vectors,
                     test_name=test_name,
                     parameters=parameters,
                     cd_data=cd_data):
@@ -359,6 +361,7 @@ def evaluate_model(read_article=read_article,
                             train_article=train_article,
                             train_article_name=train_article_name,
                             gate=parameters['gate'],
+                            load_vectors=load_vectors,
                             weight_mod=parameters['weight_mod'],
                             window=parameters['window'],
                             epochs=parameters['epochs'],
@@ -460,8 +463,7 @@ class ChatBotModel:
                             epochs=epochs,
                             cd_data=cd_data)
         else:
-            kv = cd_models+load_vectors
-            self.vectors = KeyedVectors.load(kv, mmap='r')
+            self.vectors = load_vectors.wv
 
         self.query_score = calculate_query(grams=self.grams,
                             read_article=self.read_article,

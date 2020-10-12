@@ -22,6 +22,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from wordcloud import WordCloud, ImageColorGenerator
 from PIL import Image
+from gensim.models import KeyedVectors
 from library import *
 
 cd_data = 'data/'
@@ -107,12 +108,12 @@ test_df['score'] = pd.NA
 
 # Test parameters. Limits the number of test runs.
 test_limit = len(test_df) # for full use of the dataset use len(test_df)
-number_of_tests = 50 # Number of times random paramters are generated
+number_of_tests = 1000 # Number of times random paramters are generated
 
 test_df = test_df.sample(frac=1).head(test_limit)
 
 # Name associated reports and data files from the model's evaluation.
-test_name = 'param_test_x50'
+test_name = 'param_test_fullx1000'
 
 
 
@@ -131,6 +132,8 @@ test_name = 'param_test_x50'
 
 # %% codecell
 # generate random parameters for random search parameter tuning.
+google_vectors = KeyedVectors.load_word2vec_format(cd_models+'GoogleNews-vectors-negative300.bin', binary=True)
+
 
 with open(cd_data+'train_sample.txt') as file:
     train_sample_doc = file.read()
@@ -146,7 +149,7 @@ for column in metrics_columns:
     metrics_dict[column] = []
 
 #Generate clean test file.
-pd.DataFrame(metrics_dict).to_csv(cd_data+test_name+'(ModelMetrics).csv',
+pd.DataFrame(metrics_dict).to_csv(cd_data+test_name+'.csv',
                                     index=False)
 
 
@@ -167,6 +170,7 @@ for test in tqdm(range(number_of_tests)):
             train_article=train_sample_article,
             train_article_name='train_sample.txt',
             test_df=test_df,
+            load_vectors=google_vectors,
             parameters=parameters,
             test_name=test_name)
 
@@ -193,17 +197,15 @@ for test in tqdm(range(number_of_tests)):
         # initializing DataFrame.
 
     metrics_df = pd.DataFrame(metrics_dict)
-    metrics_df.to_csv(cd_data+test_name+'(ModelMetrics).csv',
+    metrics_df.to_csv(cd_data+test_name+'.csv',
                                             index=False,
                                             mode='a',
                                             header=False)
 
 # Saving model vectors
-# metrics_df = pd.read_csv(cd_data+test_name+'(ModelMetrics).csv')
 test_df
-help(metrics_df.groupby)
 test_group = metrics_df.groupby('accuracy').max().reset_index()
-test_group.sort_values('accuracy', ascending=False).iloc[2]
+# test_group.sort_values('accuracy', ascending=False).iloc[2]
 # %% markdown
 # ### Model Performance Analysis
 # Ignoring that this model is likely over-fit at this point. We need to decide
@@ -219,36 +221,50 @@ test_group.sort_values('accuracy', ascending=False).iloc[2]
 # I will continue with the following parameters.
 
 # >accuracy                 0.955056
+#
 # >gate                     7.000000
+#
 # >weight_mod               0.855440
+#
 # >window                  13.000000
+#
 # >epochs                   9.000000
+#
 # >vector_scope            17.000000
+#
 # >vector_weight           14.888270
+#
 # >TN                      75.000000
+#
 # >FP                       1.000000
+#
 # >FN                      15.000000
+#
 # >TP                     265.000000
+#
 # >precision                0.996241
+#
 # >recall                   0.946429
+#
 # >false_positive_rate      0.013158
 
 # %% codecell
 
 # Model training done in the "model_training.py" file.
 
-user_doc = 'Chess has two players, a king and queen, and a chessboard.'
+user_doc = 'Chess has two players and each have a king and a queen'
 user_article = ProcessArticle(user_doc)
 
-with open(cd_data+'train_data.txt', 'r+') as file:
+with open(cd_data+'train_sample.txt', 'r+') as file:
     train_doc = file.read()
 train_article = ProcessArticle(train_doc)
+
 
 trained_model = ChatBotModel(user_article=user_article,
 read_article=rules_of_chess,
 train_article=train_article,
-train_article_name='train_data.txt',
-load_vectors='big_vectors.w2v',
+train_article_name='train_data_sample.txt',
+load_vectors=google_vectors,
 cd_data=cd_data,
 test_df=test_df,
 gate=7,
@@ -257,3 +273,7 @@ window=13,
 epochs=9,
 vector_scope=17,
 vector_weight=14.888270)
+
+# %% codecell
+# __Simulation__
+print(user_doc, '->', trained_model.prediction)

@@ -23,3 +23,9 @@
 [Webster's Unabridged Dictionary by Various](http://www.gutenberg.org/ebooks/29765)
 
 [Confusion matrix, accuracy, recall, precision, false positive rate and F-scores explained](https://nillsf.com/index.php/2020/05/23/confusion-matrix-accuracy-recall-precision-false-positive-rate-and-f-scores-explained/)
+
+[Google's Pretrained Word2Vec Model](https://drive.google.com/uc?id=0B7XkCwpI5KDYNlNUTTlSS21pQmM&export=download)
+
+[10 Facts about Chess](https://factfile.org/10-facts-about-chess)
+
+[Top 10 Myths About Chess ](https://www.mark-weeks.com/aboutcom/aa06f17.htm)
