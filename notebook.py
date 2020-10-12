@@ -109,14 +109,13 @@ test_df['predict'] = pd.NA
 test_df['score'] = pd.NA
 
 # Test parameters. Limits the number of test runs.
-test_limit = len(test_df) # for full use of the dataset use len(test_df)
-number_of_tests = 1000 # Number of times random paramters are generated
+test_limit = 10 # for full use of the dataset use len(test_df)
+number_of_tests = 3 # Number of times random paramters are generated
 
 test_df = test_df.sample(frac=1).head(test_limit)
 
 # Name associated reports and data files from the model's evaluation.
 test_name = 'param_test_fullx1000'
-
 
 
 # %% markdown
@@ -204,10 +203,18 @@ for test in tqdm(range(number_of_tests)):
                                             mode='a',
                                             header=False)
 
-# Saving model vectors
+# Saving model params
 test_df
 test_group = metrics_df.groupby('accuracy').max().reset_index()
-# test_group.sort_values('accuracy', ascending=False).iloc[2]
+best_params = test_group[['gate', 'weight_mod', 'window', 'epochs', 'vector_scope', 'vector_weight']]
+best_params.to_csv(cd_models+'parameters.csv', index=False)
+parameters = best_params.transpose().to_dict()[0]
+
+# %% codecell
+# __Test Results__
+print(parameters)
+metrics_df.sort_values('accuracy', ascending=False)
+
 # %% markdown
 # ### Model Performance Analysis
 # Ignoring that this model is likely over-fit at this point. We need to decide
@@ -231,39 +238,14 @@ test_group = metrics_df.groupby('accuracy').max().reset_index()
 # will provide general understanding for the model with better results, but will
 # still require specfic data to learn and test on in the form of user_docs.  **
 
-# >accuracy                 0.955056
-#
-# >gate                     7.000000
-#
-# >weight_mod               0.855440
-#
-# >window                  13.000000
-#
-# >epochs                   9.000000
-#
-# >vector_scope            17.000000
-#
-# >vector_weight           14.888270
-#
-# >TN                      75.000000
-#
-# >FP                       1.000000
-#
-# >FN                      15.000000
-#
-# >TP                     265.000000
-#
-# >precision                0.996241
-#
-# >recall                   0.946429
-#
-# >false_positive_rate      0.013158
-
 # %% codecell
 
 # Model training done in the "model_training.py" file.
 
-user_doc = 'Chess has two players and each have a king and a queen'
+# Test user docs
+user_doc = 'The game ends when a checkmate is declared.'
+# user_doc = 'Pawns can move into an apartment'
+# user_doc = 'The queen can move in any direction'
 user_article = ProcessArticle(user_doc)
 
 with open(cd_data+'train_sample.txt', 'r+') as file:
@@ -278,12 +260,12 @@ train_article_name='train_data_sample.txt',
 load_vectors=google_vectors,
 cd_data=cd_data,
 test_df=test_df,
-gate=7,
-weight_mod=0.855440,
-window=13,
-epochs=9,
-vector_scope=17,
-vector_weight=14.888270)
+gate=parameters['gate'],
+weight_mod=parameters['weight_mod'],
+window=parameters['window'],
+epochs=parameters['epochs'],
+vector_scope=int(parameters['vector_scope']),
+vector_weight=parameters['vector_weight'])
 
 # %% codecell
 # __Simulation__

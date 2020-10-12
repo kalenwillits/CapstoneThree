@@ -50,14 +50,20 @@ TODO:
 <!-- - Add create corpus function to process article in library. -->
 <!-- Use the word2vec vectors in the calculation to find synonyms.
 - Use the code in Gensim.py to do this. -->
-Update prototype ( for presentation )
 <!-- Create a validation data set for metrics. -->
 <!-- - Use this data to create a confusion matrix for measuring model performance. -->
 <!-- - generate model output for later recall -->
-Update Doc strings
+<!-- Update Doc strings -->
 <!-- Generate report on model metrics and parameters. -->
 <!-- Use random search to search for optimal model performance  -->
 <!-- Save trained Word2vec model for later import -->
 <!-- Initialize csv for model metrics. -->
-Add data to the test set. 
+<!-- Add data to the test set.  -->
 <!-- Change the load_vectors param to pass a Word2Vec Model. ( So it does not have to train or load every time.) -->
+Update prototype ( for presentation )
+Write readme
+- Jargon
+- include tree
+Write model params doc
+Create Excel Tables for presentation
+Use Metabase to analyze performance data. 

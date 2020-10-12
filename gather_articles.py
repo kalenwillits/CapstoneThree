@@ -1,6 +1,7 @@
 # gather_articles.py
 # Script to gather the top 1000 articles from wikipedia as of October 7th, 2020.
 # Run time was ~45 Minutes on a Linux machine using an i7 and 16GB of RAM.
+# This data is for the random search looking for model params.
 
 import wikipedia as wiki
 import pandas as pd
