@@ -109,8 +109,8 @@ test_df['predict'] = pd.NA
 test_df['score'] = pd.NA
 
 # Test parameters. Limits the number of test runs.
-test_limit = 10 # for full use of the dataset use len(test_df)
-number_of_tests = 3 # Number of times random paramters are generated
+test_limit = len(test_df) # for full use of the dataset use len(test_df)
+number_of_tests = 100 # Number of times random parameters are generated
 
 test_df = test_df.sample(frac=1).head(test_limit)
 
@@ -192,7 +192,6 @@ for test in tqdm(range(number_of_tests)):
     metrics_dict['false_positive_rate'].append(metrics.false_positive_rate)
 
         # test_df.to_csv(cd_data+test_name+'.csv', index=False)
-
 
 
         # initializing DataFrame.
