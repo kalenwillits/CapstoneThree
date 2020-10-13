@@ -115,7 +115,7 @@ number_of_tests = 100 # Number of times random parameters are generated
 test_df = test_df.sample(frac=1).head(test_limit)
 
 # Name associated reports and data files from the model's evaluation.
-test_name = 'param_test_fullx1000'
+test_name = 'param_test_fullx10'
 
 
 # %% markdown
@@ -134,12 +134,6 @@ test_name = 'param_test_fullx1000'
 # %% codecell
 # generate random parameters for random search parameter tuning.
 google_vectors = KeyedVectors.load_word2vec_format(cd_models+'GoogleNews-vectors-negative300.bin', binary=True)
-
-
-with open(cd_data+'train_sample.txt') as file:
-    train_sample_doc = file.read()
-
-train_sample_article = ProcessArticle(train_sample_doc)
 
 metrics_columns = ['gate', 'weight_mod', 'window', 'epochs', 'vector_scope',
    'vector_weight', 'TN', 'FP', 'FN', 'TP', 'accuracy', 'precision',
@@ -168,7 +162,7 @@ for test in tqdm(range(number_of_tests)):
     # Genereate test data and write it to csv format.
 
     test_model, test_df = evaluate_model(read_article=rules_of_chess,
-            train_article=train_sample_article,
+            train_article=None, # setting as None will load google KeyedVectors
             train_article_name='train_sample.txt',
             test_df=test_df,
             load_vectors=google_vectors,
@@ -255,7 +249,7 @@ train_article = ProcessArticle(train_doc)
 trained_model = ChatBotModel(user_article=user_article,
 read_article=rules_of_chess,
 train_article=train_article,
-train_article_name='train_data_sample.txt',
+train_article_name='train_data.txt',
 load_vectors=google_vectors,
 cd_data=cd_data,
 test_df=test_df,
@@ -269,6 +263,14 @@ vector_weight=parameters['vector_weight'])
 # %% codecell
 # __Simulation__
 print(user_doc, '->', trained_model.prediction)
+
+# __Parameters After Testing on Google cloud__
+# {'gate': 20.0,
+#  'weight_mod': 1.74327329492608,
+#  'window': 13.0,
+#  'epochs': 9.0,
+#  'vector_scope': 12.0,
+#  'vector_weight': 14.1647849325647}
 
 
 # %% markdown

@@ -1,2 +1,0 @@
-gate,weight_mod,window,epochs,vector_scope,vector_weight,TN,FP,FN,TP,accuracy,precision,recall,false_positive_rate
-53,2.3374064403018915,9,10,23,0.33250543116300935,0,0,2,0,0.0,0,0.0,0
