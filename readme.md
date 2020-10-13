@@ -5,8 +5,14 @@
 ### Project Summary
 The purpose was to automate user interaction and increase understanding by
 proving any document could be read by a chat bot and become the new interface
-for that document. Using basic methods like looping through an ngrams algorithm
-proves that it can be done for search engines, not necessarily read-in
+for that document. My hope, was design a method for creating  a tool that limits
+customer support interactions and provide an automated service to customers at a
+fraction of the cost. If this worked as designed, personal assistants could
+become instant experts on any documented topic and answer questions in a faster,
+easier to understand language.
+
+Using basic methods like looping through an ngrams algorithm
+shows that it can be done for search engines, not necessarily read-in
 documents. Because of this limitation, a read in chat bot will be severely
 limited in understanding of natural language without explicit training,
 configuration, and scripting. Ultimately the approach that was taken in this
@@ -51,7 +57,13 @@ and datatypes.*
 - doc : A raw, unprocessed string that has just been imported.
 - article : A ProcessArticle object created from a doc.
 
-### Directory Legend
+### Sandbox
+The Sandbox directory is for experiments, notes, and old code that is either not
+used in the project or was created as a rough draft before applying it to the
+completed notebook. These scripts are saved here with no intention of saving
+dependencies or writing comments. Enter at your own risk.
+
+### Directory Tree
 
 ```
 .

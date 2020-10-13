@@ -1,4 +1,5 @@
 # notebook.py
+
 # %% markdown
 # # Document Reading Chat Bot - Notebook
 # Transform any document into a chat bot and ask it questions.
