@@ -67,3 +67,8 @@ Write readme
 Write model params doc
 Create Excel Tables for presentation
 Use Metabase to analyze performance data.
+Create Metabase dashboard.
+Write technical report for technical audiences.
+Write Blog post for consumer audiences.
+Create presentation slides
+Create video presentation

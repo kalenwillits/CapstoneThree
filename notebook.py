@@ -60,9 +60,8 @@ plot_title = 'top-10-most-frequent-words'
 plt.figure(figsize=(8,6.5))
 plt.title(plot_title.replace('-', ' ').title())
 plt.plot(token_counts_df['token'][:25], color='black', label='STANDARD')
-plt.savefig(cd_figures+plot_title+'.png', transparent=True)
 plt.xticks(rotation=45)
-token_counts_df.head(25)
+plt.savefig(cd_figures+plot_title+'.png', transparent=True)
 
 # %% codecell
 # __Generating Word Cloud__
@@ -84,8 +83,8 @@ plot_title = 'frequency-of-words-in-sentence'
 plt.figure(figsize=(100,10))
 plt.title(plot_title.replace('-', ' ').title())
 plt.plot(token_freq_df.transpose()[0], color='black', label='STANDARD')
-plt.savefig(cd_figures+plot_title+'.png', transparent=True)
 plt.xticks(rotation=90)
+plt.savefig(cd_figures+plot_title+'.png', transparent=True)
 
 # %% markdown
 # ### Observation
@@ -111,12 +110,12 @@ test_df['score'] = pd.NA
 
 # Test parameters. Limits the number of test runs.
 test_limit = len(test_df) # for full use of the dataset use len(test_df)
-number_of_tests = 100 # Number of times random parameters are generated
+number_of_tests = 110 # Number of times random parameters are generated
 
 test_df = test_df.sample(frac=1).head(test_limit)
 
 # Name associated reports and data files from the model's evaluation.
-test_name = 'param_test_fullx10'
+test_name = 'param_test_fullx110'
 
 
 # %% markdown
