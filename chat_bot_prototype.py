@@ -20,7 +20,7 @@ google_vectors = KeyedVectors.load_word2vec_format(cd_models+'GoogleNews-vectors
 call('clear')
 print('-> Hello!')
 sleep(pause_time)
-print('-> I am the prototype chat bot interface for Wikipedia documents.')
+print('-> I am the prototype chatbot interface for Wikipedia documents.')
 sleep(pause_time)
 print('-> What topic would you like to discuss?')
 sleep(pause_time)
@@ -30,7 +30,7 @@ print('\n-> Please allow me a moment to train on', topic+'.')
 load_wiki_article(article_name=topic, cd_data=cd_data)
 read_doc = read_wiki_article(article_name=topic, cd_data=cd_data)
 read_article = ProcessArticle(read_doc)
-print('-> Okay I\'ve got it, tell me fact and I\'ll tell you if the article I read supports your fact.')
+print('-> Okay I\'ve got it, tell me a fact and I\'ll tell you if the article I read supports your fact.')
 sleep(pause_time)
 
 # Start loop

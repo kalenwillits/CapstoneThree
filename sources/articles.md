@@ -31,3 +31,5 @@
 [Top 10 Myths About Chess ](https://www.mark-weeks.com/aboutcom/aa06f17.htm)
 
 [Stop Words in NLP](https://medium.com/@saitejaponugoti/stop-words-in-nlp-5b248dadad47)
+
+[Why Is Random Search Better Than Grid Search For Machine Learning](https://analyticsindiamag.com/why-is-random-search-better-than-grid-search-for-machine-learning/)
