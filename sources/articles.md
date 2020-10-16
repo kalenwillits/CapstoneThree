@@ -29,3 +29,5 @@
 [10 Facts about Chess](https://factfile.org/10-facts-about-chess)
 
 [Top 10 Myths About Chess ](https://www.mark-weeks.com/aboutcom/aa06f17.htm)
+
+[Stop Words in NLP](https://medium.com/@saitejaponugoti/stop-words-in-nlp-5b248dadad47)

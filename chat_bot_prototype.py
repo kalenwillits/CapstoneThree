@@ -13,7 +13,7 @@ parameters = parameters_df.transpose().to_dict()[0]
 with open(cd_data+'train_data.txt') as file:
     train_data_doc = file.read()
 
-train_article = ProcessArticle(train_sample_doc)
+train_article = ProcessArticle(train_data_doc)
 
 google_vectors = KeyedVectors.load_word2vec_format(cd_models+'GoogleNews-vectors-negative300.bin', binary=True)
 
