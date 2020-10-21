@@ -20,6 +20,8 @@ project is better suited for B2B products that have the resources needed to
 maintain complex databases. A B2C product would require more automation at the
 expense of the user tediously training the model.
 
+
+
 ### About The Library
 #### ProcessArticle
 Much of this project was based on the idea that the product would be fully automated. And so, the library holds the functions and classes needed to recreate the project in a different setting. The data gathering and cleaning is wrapped in the ProcessArticle class. This creates pre-cleaned objects that are ready for machine learning and analysis.
@@ -29,6 +31,26 @@ The model is a Frankenstein neural network using the looping ngrams and Word2Vec
 
 ### Prototype
 The prototype uses parameters generated from the random search test ran on Google's Compute Engine. Unfortunately, the quality of data provided for the test was too sparse for a perfect result, and I needed to run other tests to find the best parameters for this prototype.
+
+### Running The Prototype
+1. First set up your environment with the required packages. Package requirements
+and versions are listed at the bottom of this readme. Please note that
+additional NLTK packages may be required. Also, [Google's pretrained word2vec](https://drive.google.com/uc?id=0B7XkCwpI5KDYNlNUTTlSS21pQmM&export=download) Will need to be
+downloaded and unzipped into the "models" directory. The model is ~3GB unzipped
+and is too large to push to GitHub. Alternatively, you can specify a train document
+in the chat_bot_prototype.py file, however this is bound to decrease performance without
+properly trained vectors.
+2. Run the 'chat_bot_prototype.py' in your python interpreter. For Linux, the
+process involves moving your terminal to the project directory and calling
+python with chat_bot_prototype.py as an argument. Like so:
+> $python3 chat_bot_prototype.py
+3. There will be a few moments of load time as the chatbot loads in the google vectors.
+4. The chatbot will supply a greeting and further instructions when the load is complete.
+Your next input should be a sentence that you would like to know is true or false.
+The chat bot will tell you based on the read-in article if the fact is true or
+false. By default, the chatbot will read in the rules of chess.
+5. This behavior will loop until the user inputs 'bye'. The bot will say Goodbye
+and close. 
 
 The purpose of this bot was for presentation purposes only and there are known limitations, such as:
 - Single word user docs will throw an error. ( Stop words don't count )
@@ -147,8 +169,10 @@ pandas==1.0.1
 wordcloud==1.8.0
 gensim==3.8.3
 wikipedia==1.4.0
-nltk==3.4.5
+nltk==3.4.5 ( additional downloads required )
 tqdm==4.42.1
+
+
 
 
 compiler   : GCC 7.3.0
