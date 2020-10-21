@@ -50,7 +50,7 @@ Your next input should be a sentence that you would like to know is true or fals
 The chat bot will tell you based on the read-in article if the fact is true or
 false. By default, the chatbot will read in the rules of chess.
 5. This behavior will loop until the user inputs 'bye'. The bot will say Goodbye
-and close. 
+and close.
 
 The purpose of this bot was for presentation purposes only and there are known limitations, such as:
 - Single word user docs will throw an error. ( Stop words don't count )
@@ -89,27 +89,26 @@ dependencies or writing comments. Enter at your own risk.
 
 ```
 .
-├── chat_bot_prototype.py
+├── chat_bot_prototype.py #executable prototype python script
 ├── data
-│   ├── chatbot.db
-│   ├── dummy_train.txt
-│   ├── model_metrics.csv
-│   ├── model_metrics_data.csv
-│   ├── param_test_5x5(ModelMetrics).csv
+│   ├── chatbot.db #Database containing model metrics for analysis in Metabase.
+│   ├── dummy_train.txt #Useless train data for testing.
+│   ├── model_metrics.csv #Train data with model classifications and predict score.
+│   ├── param_test_5x5(ModelMetrics).csv # Random search parameter test output with 5 observations and 5 interations.
 │   ├── param_test_fullx100.csv
 │   ├── param_test_fullx10.csv
 │   ├── param_test_fullx50(ModelMetrics).csv
-│   ├── rules of chess.txt
-│   ├── sample_test.csv
+│   ├── rules of chess.txt #read in chess document
+│   ├── sample_test.csv # Sample test generated during debugging.
 │   ├── sample_test(ModelMetrics).csv
-│   ├── stop_words.txt
-│   ├── test_data.csv
-│   ├── The_Grand_Mansion_Gate.txt
-│   ├── tokens_1h.csv
-│   ├── tokens_counts.csv
-│   ├── tokens.csv
-│   ├── top_1000_wiki.csv
-│   └── train_data.txt
+│   ├── stop_words.txt # List of stopwords that the Stop class reads from.
+│   ├── test_data.csv # Large amount of test containing many articles. Unused in production.
+│   ├── The_Grand_Mansion_Gate.txt # Random wikipedia article used during the random search.
+│   ├── tokens_1h.csv # Saved processing of one_hot encoding from read article.
+│   ├── tokens_counts.csv # Saved processing of corpus encoding from read article.
+│   ├── tokens.csv # Saved processing of token encoding from read article.
+│   ├── top_1000_wiki.csv # List of the top 1000 wiki articles. Unused in production.
+│   └── train_data.txt # File dump for articles to hand-train the Word2Vec model. Unused in production.
 ├── docs
 │   ├── Google_Cloud_model_metrics.html
 │   ├── Google_Cloud_model_metrics.xlsx
@@ -119,18 +118,18 @@ dependencies or writing comments. Enter at your own risk.
 │   ├── most-frequent-words-in-sentence.png
 │   ├── top-10-most-frequent-words.png
 │   └── wordcloud.png
-├── gather_articles.py
-├── generate_test_data.py
-├── library.py
+├── gather_articles.py # Gathers the top 1000 articles from wikipedia and places them in one txt file. This was meant to gather data for training a Word2Vec model. However, there was too much data to be processed by a single machine. Google's Word2Vec pre-trained vectors were used instead.
+├── generate_test_data.py # Creates the test data from the read-in article and a random wikipedia article.
+├── library.py # Library for chatbot API.
 ├── models
-│   ├── cloud_parameters.csv
-│   ├── GoogleNews-vectors-negative300.bin
+│   ├── cloud_parameters.csv # Parameters after the test using GCP.
+│   ├── GoogleNews-vectors-negative300.bin # Google's pre-trained vectors.
 │   ├── GoogleNews-vectors-negative300.bin.gz
-│   ├── parameters.csv
-│   └── vectors.w2v
-├── notebook.ipynb
-├── notebook.py
-├── params_query.sql
+│   ├── parameters.csv # Parameters file where the chatbot is reading it's parameters from.
+│   └── vectors.w2v # Saved vectors of a trained Word2Vec model. Unused in production.
+├── notebook.ipynb # Jupyter Notebook
+├── notebook.py # Jupyter notebook as a executable Python script.
+├── params_query.sql # Sql query from the Metabase instance to find the best parameters after a test over GCP.
 ├── __pycache__
 │   ├── library.cpython-37.pyc
 │   ├── model.cpython-37.pyc
@@ -155,8 +154,7 @@ dependencies or writing comments. Enter at your own risk.
 │   ├── spacy.py
 │   └── words2Vec.py
 ├── sources
-│   └── articles.md
-└── tree.txt
+│   └── articles.md # referenced articles and documentation.
 
 7 directories, 61 files
 ```
