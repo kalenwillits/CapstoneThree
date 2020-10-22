@@ -1,4 +1,3 @@
-<!-- readme.md -:
 # ChatBot Document Reader
 ## Changing Any Document Into An Interactive Chat Bot.
 
